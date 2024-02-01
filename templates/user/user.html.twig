@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello UserController!{% endblock %}
+
+{% block body %}
+
+
+<div class="user-body">
+    <div class="user-menu">
+        <nav>
+
+        </nav>
+    </div>
+
+
+    <div class="user-content">
+        <div class="adress-content">
+            <div class="add-new-adress">
+                <a href="{{path('user_description')}}">
+                <div class="add">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z"/></svg>
+                    </div>
+                    <h3>Ajouter une adresse</h3>
+                </a>
+            </div>
+        </div>
+        <div class="adress-show">
+            {% for description in descriptions %}
+                {# {{ description.birthdate | format_datetime(pattern= 'd M Y', locale='fr') }} <br> #}
+            <div class="adress">
+                {{app.user.fullname}} <br>
+                {{ description.adress }} <br>
+                {{ description.city }}, {{ description.postalcode }} <br>
+                {{ country_names(description.country, 'fr')['FR'] }} <br>
+                Numéros de téléphone : {{ description.phone}}
+            </div> 
+            {% endfor %}
+        </div>    
+    </div>
+
+</div>
+{% endblock %}

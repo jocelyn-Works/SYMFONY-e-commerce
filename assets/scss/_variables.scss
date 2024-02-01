@@ -3,6 +3,7 @@
 
 $primary:#121b4b;
 $secondary:#6ec0de;
+$gray: gray;
 $white:white;
 $footer: rgba(255, 166, 0);
 $border-radius:15px;
@@ -11,7 +12,11 @@ $title:x-large;
 
 body{
     width: 100%;
-    margin-top: 50vh;
+    margin-top: 15vh;
+    a {
+        color: inherit; /* ou spécifiez une autre couleur, par exemple, color: black; */
+        text-decoration: none;
+    }
     
 }
 
@@ -23,4 +28,9 @@ body{
 .flex-column{
     display: flex;
     flex-direction: column;
+}
+.flex-wrap{
+    display: flex;
+    flex-wrap: wrap;
+
 }

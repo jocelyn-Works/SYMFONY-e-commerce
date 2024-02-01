@@ -36,13 +36,13 @@ class DescriptionUserRepository extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?DescriptionUser
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->getQuery()
-//            ->getOneOrNullResult()
-//        ;
-//    }
+public function findUserDescription($userId): array
+{
+    return $this->createQueryBuilder('d')
+        ->leftJoin('d.author', 'a') 
+        ->andWhere('a.id = :userId')
+        ->setParameter('userId', $userId)
+        ->getQuery()
+        ->getResult();
+}
 }

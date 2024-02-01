@@ -1,0 +1,69 @@
+
+.user-body{
+    width: 100%;
+    @extend.flex-row;
+    .user-menu{
+        width: 25%;
+        height: 85vh;
+        background-color: #d26262;;
+    }
+    .user-content{
+        width: 75%;
+        
+        .adress-content{
+            width: 100%;
+            height: 30vh;
+            @extend.flex-row;
+            justify-content: center;
+            align-items: center;
+            .add-new-adress{
+                width: 20%;
+                height: 25vh;
+                border : 2px dashed $gray;
+                border-radius: 15px;
+                @extend.flex-column;
+                justify-content: center;
+                align-items: center;
+                .add{
+                    width: 100%;
+                    @extend.flex-row;
+                    justify-content: center;
+                    align-items: center;
+                    svg{
+                        width: 80px;
+                        height: 80px;
+                    }
+                }
+                
+
+
+            }
+
+
+        }
+        .adress-show{
+            width: 100%;
+            padding: 20px;
+            @extend.flex-wrap;
+            justify-content: space-evenly;
+
+            .adress {
+                width: calc(33.33% - 20px); /* 33.33% pour afficher trois blocs par ligne, -20px pour l'espace entre les blocs */
+                margin: 10px; /* Espace entre les blocs */
+                height: 35%;
+                padding: 15px;
+                @extend.flex-column;
+                justify-content: center;
+                align-items: center;
+                text-align: center;
+                line-height: 1.5;
+                border: 1px solid black;
+                border-radius: 15px;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+                font-size: x-large;
+            }
+        
+        }
+
+    }
+}

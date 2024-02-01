@@ -19,18 +19,13 @@
         <div class="user-menu">
             <ul>
                 {% if is_granted('ROLE_USER') %}
-                <div class="user-granted">
-                    {{app.user.fullname}}
-                    <div class="connected">? picture?</div>
-                </div>
-                <li><a href="" >mon panier</a></li>
+                <div class="user-granted">{{app.user.fullname}}</div>
+                <li><a href="{{path('user')}}" >Votre compte</a></li>
                 <li><a href="" >mes commandes</a></li>
                 <li><a href="" >Modifier mes infos perso</a></li>
                 <li><a href="{{path('logout')}}" >Deconnexion</a></li>
 
                 {% else %}
-               
-
                 <li><a href="{{path('signup')}}" >S'inscrire</a></li>
                 <li><a href="{{path('login')}}" >Se connecter</a></li>
                 {% endif %}
