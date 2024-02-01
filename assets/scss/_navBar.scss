@@ -1,0 +1,118 @@
+header{
+    width: 100%;
+    height: 15vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: $primary;
+    border: 1px solid $primary;
+    nav{
+        @extend.flex-row;
+        align-items: center;
+        margin: 3vh 5rem;
+        .logo{
+            width: 20%;
+            height: 10vh;
+            @extend.flex-row;
+            justify-content: center;
+            border: 2px solid skyblue;
+        }
+        .menu {
+            width: 60%;
+          
+            ul {
+              list-style: none;
+              @extend .flex-row;
+              justify-content: space-evenly;
+          
+              li {
+                display: inline-block;
+                list-style: none;
+                margin: 10px 20px;
+          
+                a {
+                  color: $white;
+                  text-decoration: none;
+                  font-size: x-large;
+                  position: relative;
+          
+                  &::after {
+                    content: '';
+                    width: 0;
+                    height: 0.4vh;
+                    background: $secondary;
+                    position: absolute;
+                    left: 0;
+                    bottom: -6px;
+                    transition: 0.5s;
+                  }
+          
+                  &:hover::after {
+                    width: 100%;
+                  }
+                }
+              }
+            }
+          }
+        .user{
+            width: 8%;
+            @extend.flex-row;
+            justify-content: center;
+            svg{
+                fill:$white;
+                cursor: pointer;
+                
+            }
+            
+        }
+        .cart-shop{
+            width: 8%;
+            @extend.flex-row;
+            justify-content: center;
+            svg{
+                fill:$white;
+                cursor: pointer;
+                
+            }
+        }
+        .user-menu {
+            visibility: hidden;
+            position: absolute;
+            top: 11vh;
+            left: 80rem;
+            background-color: $white;
+            border: 1px solid $white;
+            border-radius: 10px;
+            z-index: 2;
+            .user-granted{
+              width: 100%;
+              height: 4vh;
+              @extend.flex-row;
+              justify-content: center;
+              align-items: center;
+              background-color: $primary;
+              color: $white;
+              border-top-right-radius: 10px;
+              border-top-left-radius: 10px;
+              
+            }
+            ul {
+                list-style: none;
+                padding: 0;
+                li {
+                    a {
+                        display: block;
+                        color: #333;
+                        text-decoration: none;
+                        padding: 10px 20px;
+                        border-radius: 10px;
+    
+                        &:hover {
+                            background-color: #b7b4b493;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

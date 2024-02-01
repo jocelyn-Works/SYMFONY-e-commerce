@@ -1,0 +1,26 @@
+
+
+
+$primary:#121b4b;
+$secondary:#6ec0de;
+$white:white;
+$footer: rgba(255, 166, 0);
+$border-radius:15px;
+$box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+$title:x-large;
+
+body{
+    width: 100%;
+    margin-top: 50vh;
+    
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-column{
+    display: flex;
+    flex-direction: column;
+}

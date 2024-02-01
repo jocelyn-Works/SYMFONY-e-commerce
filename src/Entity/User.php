@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -49,10 +51,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: DescriptionUser::class)]
+    private Collection $descriptionUsers;
+
+   
+
+    
+
     public function __construct()
     {
         $this->roles = ['ROLE_USER'];
         $this->createdAt = new \DateTimeImmutable();
+        $this->descriptionUsers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -164,4 +174,39 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, DescriptionUser>
+     */
+    public function getDescriptionUsers(): Collection
+    {
+        return $this->descriptionUsers;
+    }
+
+    public function addDescriptionUser(DescriptionUser $descriptionUser): static
+    {
+        if (!$this->descriptionUsers->contains($descriptionUser)) {
+            $this->descriptionUsers->add($descriptionUser);
+            $descriptionUser->setAuthor($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDescriptionUser(DescriptionUser $descriptionUser): static
+    {
+        if ($this->descriptionUsers->removeElement($descriptionUser)) {
+            // set the owning side to null (unless already changed)
+            if ($descriptionUser->getAuthor() === $this) {
+                $descriptionUser->setAuthor(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+
+
+    
 }
