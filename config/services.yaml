@@ -25,3 +25,9 @@ services:
     App\Controller\SecurityController:
         arguments:
             $formLoginAuthenticator: '@security.authenticator.form_login.main'
+
+    App\Service\DescriptionService:
+        arguments:
+            $entityManager: '@doctrine.orm.entity_manager'
+            $formFactory: '@form.factory'
+            $requestStack: '@request_stack'   

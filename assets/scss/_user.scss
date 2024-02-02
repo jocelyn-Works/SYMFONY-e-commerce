@@ -10,37 +10,54 @@
     .user-content{
         width: 75%;
         
-        .adress-content{
+        .adress-content {
             width: 100%;
             height: 30vh;
             @extend.flex-row;
             justify-content: center;
             align-items: center;
-            .add-new-adress{
-                width: 20%;
-                height: 25vh;
-                border : 2px dashed $gray;
-                border-radius: 15px;
-                @extend.flex-column;
+          
+            .add-new-adress {
+              width: 20%;
+              height: 25vh;
+              background-color: $gray-light;
+              border: 4px dashed $gray;
+              border-radius: 15px;
+              @extend.flex-column;
+              justify-content: center;
+              align-items: center;
+              cursor: pointer;
+          
+              .add {
+                width: 100%;
+                @extend.flex-row;
                 justify-content: center;
                 align-items: center;
-                .add{
-                    width: 100%;
-                    @extend.flex-row;
-                    justify-content: center;
-                    align-items: center;
-                    svg{
-                        width: 80px;
-                        height: 80px;
-                    }
+          
+                img {
+                  width: 80px;
+                  height: 80px;
                 }
-                
-
-
+              }
             }
-
-
-        }
+          
+            .modal-content {
+                width: 20%;
+                height: 25vh;
+                background-color: $gray-light;
+                display: none; // Caché par défaut
+                position: fixed;
+                top: 30%;
+                left: 62%;
+                line-height: 1.5;
+                transform: translate(-50%, -50%);
+                padding: 20px;
+                border: 1px solid black;
+                border-radius: 15px;
+                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+                z-index: 1000; // Valeur plus élevée que celle de .add-new-adress
+            }
+          }
         .adress-show{
             width: 100%;
             padding: 20px;
@@ -48,6 +65,18 @@
             justify-content: space-evenly;
 
             .adress {
+                .remove-update-description {
+                    width: 100%;
+                    @extend.flex-row;
+                    justify-content: space-around;
+                    margin-bottom: 3vh;
+    
+                        img {
+                            width: 30px; 
+                            height: 30px;   
+                        }
+                    
+                }
                 width: calc(33.33% - 20px); /* 33.33% pour afficher trois blocs par ligne, -20px pour l'espace entre les blocs */
                 margin: 10px; /* Espace entre les blocs */
                 height: 35%;
@@ -61,6 +90,7 @@
                 border-radius: 15px;
                 box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
                 font-size: x-large;
+            
             }
         
         }
