@@ -1,5 +1,6 @@
-{% extends 'base.html.twig' %} {% block title %}Hello UserController!{% endblock
-%} {% block body %}
+{% extends 'base.html.twig' %}
+{% block title %}Hello UserController!{% endblock%}
+{% block body %}
 
 <div class="user-body">
   <div class="user-menu">
@@ -34,7 +35,7 @@
       <div class="adress">
         <div class="remove-update-description">
           <div class="update-description">
-            <img src="{{asset ('build/images/icons/pen-to-square-regular.svg')}}" alt="">
+            <a href="{{path('edit-description', {'id': description.id}) }}"><img src="{{asset ('build/images/icons/pen-to-square-regular.svg')}}" alt=""></a>
           </div>
           <div class=""></div>
           <div class="remove-description">
