@@ -25,6 +25,7 @@ class UserController extends AbstractController
 
 
     #[Route('/user', name: 'user')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user(
         DescriptionUserRepository $descriptionRepository,
         UserInterface $currentUser,
@@ -41,7 +42,31 @@ class UserController extends AbstractController
 
         $descriptions = $descriptionRepository->findUserDescription($currentUser);
 
-        return $this->render('user/user.html.twig', [
+        return $this->render('user/index.html.twig', [
+            'form' => $formDescription,
+            'descriptions' => $descriptions,
+        ]);
+    }
+
+    #[Route('/user/adress', name: 'user_adress')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function user_adress(
+        DescriptionUserRepository $descriptionRepository,
+        UserInterface $currentUser,
+        DescriptionService $descriptionService,
+    ): Response 
+    {
+
+        $formDescription = null; // Initialise la variable à null
+
+        // Vérifie si la requête est une soumission de formulaire
+        
+            // Crée le formulaire seulement lorsqu'il est soumis
+        $formDescription = $descriptionService->addDescription($currentUser);
+
+        $descriptions = $descriptionRepository->findUserDescription($currentUser);
+
+        return $this->render('user/user_adress.html.twig', [
             'form' => $formDescription,
             'descriptions' => $descriptions,
         ]);
@@ -49,6 +74,7 @@ class UserController extends AbstractController
 
 
     #[Route('/remove_description/{id}', name: 'remove-description')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function removeFriend(int $id,
     Request $request,
     DescriptionUserRepository $descriptionRepository,
@@ -72,6 +98,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/edit_description/{id}', name: 'edit-description')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function editDescription(int $id, Request $request,
     EntityManagerInterface $em,
     DescriptionUserRepository $descriptionRepository,
