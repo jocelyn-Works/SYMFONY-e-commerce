@@ -41,14 +41,14 @@ class UserCrudController extends AbstractCrudController
 
             TextField::new('lastname'),
 
-            TextField::new('email')
-            ->setFormTypeOption('disabled', 'disabled'),
+            TextField::new('email'),
+            // ->setFormTypeOption('disabled', 'disabled') 
 
             ArrayField::new('roles')
             ->hideOnIndex(),
 
-            DateTimeField::new('createdAt')
-            ->setFormTypeOption('disabled', 'disabled'),
+            DateTimeField::new('createdAt'),
+            // ->setFormTypeOption('disabled', 'disabled'),
 
             AssociationField::new('descriptionUsers')
             ->setLabel('Adress Utilisateurs')
