@@ -58,7 +58,7 @@ class DescriptionUser
     #[Assert\Length(min: 5, minMessage:" Le numéros de télephone doit faire plus de 5 caracteres.")]
     private ?string $phone = null;
 
-    
+        
 
     public function getId(): ?int
     {
