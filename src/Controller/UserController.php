@@ -36,7 +36,7 @@ class UserController extends AbstractController
         ]);
     }
 
-    // ajouter une adress
+    
     #[Route('/user/adress', name: 'user_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_adress(
@@ -52,6 +52,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    // ajouter une adress
     #[Route('/user/add_adress', name: 'user_add_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function add_user_adress(
@@ -151,6 +152,23 @@ class UserController extends AbstractController
             'descriptions' => $descriptions
         ]);
     }
+
+
+
+    #[Route('/user/commande', name: 'user_commande')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function user_commande(
+    
+    ): Response 
+    {
+
+
+        return $this->render('user/userCommande.html.twig', [
+            
+        ]);
+    }
+
+
 
 
 // changer le mot de passe

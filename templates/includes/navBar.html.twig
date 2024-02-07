@@ -1,17 +1,16 @@
 <header>
     <nav>
-        <a href="{{path('home')}}" class="logo"></a>
+        <a href="{{path('home')}}" class="logo"> &#10084</a>
 
         <section class="menu" id="menu">
-                        <div class="menu-list">
-                            <ul>
-                                <li> <h3 class="tab-links active-link" onclick="opentab('homme')">Homme</h3></li>
-                                <li><h3 class="tab-links" onclick="opentab('femme')">Femme</h3></li>
-                                <li><h3 class="tab-links"  onclick="opentab('enfant')">Enfant</h3></li>
-                                <li> <h3 class="tab-links"  onclick="opentab('autres')">Autres</h3></li>
-                            </ul>
-                        </div>
-                
+            <div class="menu-list">
+                <ul>
+                    <li><h3 class="tab-links" data-tabname="homme">Homme</h3></li>
+                    <li><h3 class="tab-links" data-tabname="femme">Femme</h3></li>
+                    <li><h3 class="tab-links" data-tabname="enfant">Enfant</h3></li>
+                    <li><h3 class="tab-links" data-tabname="autres">Autres</h3></li>
+                </ul>
+            </div>                        
         </section>
 
 
@@ -25,48 +24,73 @@
         <div class="user-menu">
             <ul>
                 {% if is_granted('ROLE_USER') %}
-                <div class="user-granted">{{app.user.fullname}}</div>
-                <li><a href="{{path('user')}}" >Votre compte</a></li>
-                <li><a href="" >mes commandes</a></li>
-                <li><a href="" >Modifier mes infos perso</a></li>
-                <li><a href="{{path('logout')}}" >Deconnexion</a></li>
-
+                <div class="user-granted">{{ app.user.fullname }}</div>
+                <li><a href="{{ path('user') }}">Votre compte</a></li>
+                <li><a href="{{ path('user_commande') }}">Mes commandes</a></li>
+                <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="#">Administration</a></li>
+                {% endif %}
                 {% else %}
-                <li><a href="{{path('signup')}}" >S'inscrire</a></li>
-                <li><a href="{{path('login')}}" >Se connecter</a></li>
+                <li><a href="{{ path('signup') }}">S'inscrire</a></li>
+                <li><a href="{{ path('login') }}">Se connecter</a></li>
                 {% endif %}
             </ul>
         </div>
     </nav>
 
     <div class="under-menu">
-        <div class="tab-contents active-tab" id="homme">
+        <div class="tab-contents" id="homme">
             <ul>
-                <li><a href=""></a>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum totam nulla quam sequi exercitationem tempora illo. Amet nulla accusamus ipsam possimus, exercitationem temporibus odit, aliquam corrupti quaerat perspiciatis porro excepturi.</li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-                <li><a href=""></a></li>
-
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
+                    <li>un peu de texte test homme</li>
             </ul>
             </div>
 
             <div class="tab-contents" id="femme">
                 <ul>
-
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
+                    <li>un peu de texte test femme</li>
                 </ul>
             </div>
 
             <div class="tab-contents" id="enfant">
                 <ul>
-                   
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
+                    <li>un peu de texte test enfant</li>
                 </ul>
             </div>
 
             <div class="tab-contents" id="autres">
                 <ul>
-                    
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
+                    <li>un peu de texte test autres</li>
                 </ul>
             </div>
     </div>
+    
 </header>
