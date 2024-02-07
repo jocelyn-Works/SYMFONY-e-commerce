@@ -29,7 +29,7 @@
                 <li><a href="{{ path('user_commande') }}">Mes commandes</a></li>
                 <li><a href="{{ path('logout') }}">Déconnexion</a></li>
                 {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="#">Administration</a></li>
+                <li><a href="{{path('admin')}}">Administration</a></li>
                 {% endif %}
                 {% else %}
                 <li><a href="{{ path('signup') }}">S'inscrire</a></li>
