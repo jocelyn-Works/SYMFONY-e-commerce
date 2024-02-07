@@ -56,7 +56,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
    
 
-    
+    public function __toString(): string
+{
+    return $this->getFullname(); // Assurez-vous que la méthode getFullname() existe dans votre classe User
+}
 
     public function __construct()
     {

@@ -36,17 +36,27 @@ class DescriptionUserCrudController extends AbstractCrudController
                 ->hideOnForm(),
 
             AssociationField::new('author')
+                ->setFormTypeOption('disabled', 'disabled')
                 ->setLabel('Auteur')
                 ->formatValue(function ($value, $entity) {
                     return $entity->getAuthor()->getFullname();
-    }),
+            }),
 
     
-            TextareaField::new('country'),
-            TextField::new('adress'),
-            TextField::new('postalCode'),
-            TextField::new('city'),
-            TextField::new('phone'),
+            TextareaField::new('country')
+            ->setFormTypeOption('disabled', 'disabled'),
+
+            TextField::new('adress')
+            ->setFormTypeOption('disabled', 'disabled'),
+
+            TextField::new('postalCode')
+            ->setFormTypeOption('disabled', 'disabled'),
+
+            TextField::new('city')
+            ->setFormTypeOption('disabled', 'disabled'),
+
+            TextField::new('phone')
+            ->setFormTypeOption('disabled', 'disabled'),
 
 
             

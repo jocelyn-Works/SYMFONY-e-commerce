@@ -51,7 +51,8 @@ class UserCrudController extends AbstractCrudController
             ->setFormTypeOption('disabled', 'disabled'),
 
             AssociationField::new('descriptionUsers')
-            ->setLabel('Adress Utilisateurs'),
+            ->setLabel('Adress Utilisateurs')
+            ->hideOnForm(),
             
         ];
     }
