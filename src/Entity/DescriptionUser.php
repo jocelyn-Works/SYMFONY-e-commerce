@@ -58,9 +58,7 @@ class DescriptionUser
     #[Assert\Length(min: 5, minMessage:" Le numéros de télephone doit faire plus de 5 caracteres.")]
     private ?string $phone = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Assert\NotBlank(message: "Veuillez renseigner une date d'anniversaire.")]
-    private ?\DateTimeInterface $birthdate = null;
+    
 
     public function getId(): ?int
     {
@@ -139,15 +137,5 @@ class DescriptionUser
         return $this;
     }
 
-    public function getBirthdate(): ?\DateTimeInterface
-    {
-        return $this->birthdate;
-    }
-
-    public function setBirthdate(\DateTimeInterface $birthdate): static
-    {
-        $this->birthdate = $birthdate;
-
-        return $this;
-    }
+    
 }

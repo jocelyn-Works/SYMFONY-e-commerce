@@ -32,10 +32,6 @@ class DescriptionUserType extends AbstractType
             ->add('phone', TextType::class,[
                 'label' => 'Numéros de téléphone'
             ])
-            ->add('birthdate', BirthdayType::class, [
-                'label' => 'Date d\'anniversaire :'
-            ])
-            
         ;
     }
 

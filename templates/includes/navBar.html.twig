@@ -1,20 +1,26 @@
 <header>
     <nav>
         <a href="{{path('home')}}" class="logo"></a>
-        <div class="menu">
-            <ul>
-                <li><a href="#">Galerie</a></li>
-                <li><a href="#">Actualité</a></li>
-                <li><a href="#">À propos</a></li>
-                <li><a href="#">Autres </a></li>
-            </ul>
-        </div>
+
+        <section class="menu" id="menu">
+                        <div class="menu-list">
+                            <ul>
+                                <li> <h3 class="tab-links active-link" onclick="opentab('homme')">Homme</h3></li>
+                                <li><h3 class="tab-links" onclick="opentab('femme')">Femme</h3></li>
+                                <li><h3 class="tab-links"  onclick="opentab('enfant')">Enfant</h3></li>
+                                <li> <h3 class="tab-links"  onclick="opentab('autres')">Autres</h3></li>
+                            </ul>
+                        </div>
+                
+        </section>
+
+
         <div class="user">
-            <svg xmlns="http://www.w3.org/2000/svg" id="userIcon" height="35" width="35" viewBox="0 0 448 512">
-            <path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+            <img id="userIcon" src="{{asset ('build/images/icons/user-icone.svg')}}" alt="Icone utilisateur">
+            
         </div>
         <div class="cart-shop">
-            <svg xmlns="http://www.w3.org/2000/svg" id="" height="35" width="35" viewBox="0 0 448 512"><path d="M160 112c0-35.3 28.7-64 64-64s64 28.7 64 64v48H160V112zm-48 48H48c-26.5 0-48 21.5-48 48V416c0 53 43 96 96 96H352c53 0 96-43 96-96V208c0-26.5-21.5-48-48-48H336V112C336 50.1 285.9 0 224 0S112 50.1 112 112v48zm24 48a24 24 0 1 1 0 48 24 24 0 1 1 0-48zm152 24a24 24 0 1 1 48 0 24 24 0 1 1 -48 0z"/></svg>
+            <img id="shoppingIcon" src="{{asset ('build/images/icons/shopping-bag.svg')}}" alt="Icone panier">
         </div>
         <div class="user-menu">
             <ul>
@@ -32,4 +38,35 @@
             </ul>
         </div>
     </nav>
+
+    <div class="under-menu">
+        <div class="tab-contents active-tab" id="homme">
+            <ul>
+                <li><a href=""></a>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum totam nulla quam sequi exercitationem tempora illo. Amet nulla accusamus ipsam possimus, exercitationem temporibus odit, aliquam corrupti quaerat perspiciatis porro excepturi.</li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+                <li><a href=""></a></li>
+
+            </ul>
+            </div>
+
+            <div class="tab-contents" id="femme">
+                <ul>
+
+                </ul>
+            </div>
+
+            <div class="tab-contents" id="enfant">
+                <ul>
+                   
+                </ul>
+            </div>
+
+            <div class="tab-contents" id="autres">
+                <ul>
+                    
+                </ul>
+            </div>
+    </div>
 </header>

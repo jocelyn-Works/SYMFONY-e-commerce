@@ -4,8 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Entity\DescriptionUser;
-use App\Repository\UserRepository;
-use App\Service\DescriptionService;
+use App\Form\DescriptionUserType;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\DescriptionUserRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -27,53 +26,72 @@ class UserController extends AbstractController
     #[Route('/user', name: 'user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user(
-        DescriptionUserRepository $descriptionRepository,
-        UserInterface $currentUser,
-        DescriptionService $descriptionService,
+    
     ): Response 
     {
 
-        $formDescription = null; // Initialise la variable à null
-
-        // Vérifie si la requête est une soumission de formulaire
-        
-            // Crée le formulaire seulement lorsqu'il est soumis
-        $formDescription = $descriptionService->addDescription($currentUser);
-
-        $descriptions = $descriptionRepository->findUserDescription($currentUser);
 
         return $this->render('user/index.html.twig', [
-            'form' => $formDescription,
-            'descriptions' => $descriptions,
+            
         ]);
     }
 
+    // ajouter une adress
     #[Route('/user/adress', name: 'user_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_adress(
         DescriptionUserRepository $descriptionRepository,
-        UserInterface $currentUser,
-        DescriptionService $descriptionService,
+        UserInterface $currentUser
     ): Response 
     {
-
-        $formDescription = null; // Initialise la variable à null
-
-        // Vérifie si la requête est une soumission de formulaire
-        
-            // Crée le formulaire seulement lorsqu'il est soumis
-        $formDescription = $descriptionService->addDescription($currentUser);
 
         $descriptions = $descriptionRepository->findUserDescription($currentUser);
 
         return $this->render('user/user_adress.html.twig', [
-            'form' => $formDescription,
             'descriptions' => $descriptions,
         ]);
     }
 
+    #[Route('/user/add_adress', name: 'user_add_adress')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function add_user_adress(
+        Request $request,
+        EntityManagerInterface $em,
+        UserInterface $user,
+        DescriptionUserRepository $descriptionRepository,
+        UserInterface $currentUser,
+    ): Response 
+    {
 
-    #[Route('/remove_description/{id}', name: 'remove-description')]
+        $newDescription = new DescriptionUser();
+
+        $addDescriptionForm = $this->createForm(DescriptionUserType::class, $newDescription);
+        
+
+        $addDescriptionForm->handleRequest($request);
+
+        if ($addDescriptionForm->isSubmitted() && $addDescriptionForm->isValid()) {
+
+            $newDescription->setAuthor($user);
+
+            
+            $em->persist($newDescription);
+            $em->flush();
+
+            return $this->redirectToRoute('user_adress');
+
+        }
+
+        $descriptions = $descriptionRepository->findUserDescription($currentUser);
+
+        return $this->render('user/add_user_adress.html.twig', [
+            'form' => $addDescriptionForm->createView(),
+            'descriptions' => $descriptions,
+        ]);
+    }
+
+// suprimer une adress
+    #[Route('/user/remove_description/{id}', name: 'remove-description')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function removeFriend(int $id,
     Request $request,
@@ -97,39 +115,45 @@ class UserController extends AbstractController
         return $referer ? $this->redirect($referer) : $this->redirect(('user'));
     }
 
-    #[Route('/edit_description/{id}', name: 'edit-description')]
+// modifier une adress
+    #[Route('/user/edit_description/{id}', name: 'edit-description')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function editDescription(int $id, Request $request,
     EntityManagerInterface $em,
-    DescriptionUserRepository $descriptionRepository,
-    DescriptionService $descriptionService): Response
+    DescriptionUserRepository $descriptionRepository): Response
     {
+         /**
+         * @var User
+         */
         $currentUser = $this->getUser();
 
-        if (!$currentUser) {
+        if(!$currentUser){
             return $this->redirect($request->getUri());
+
         }
 
-        $description = $em->getRepository(DescriptionUser::class)->find($id);
+        $description = $descriptionRepository->find($id);
 
-        if (!$description) {
-            // Gérer le cas où la description n'est pas trouvée, par exemple rediriger ou afficher une erreur
+        $formDescription =$this->createForm(DescriptionUserType::class, $description);
+        
+        $formDescription->handleRequest($request);
+        if($formDescription->isSubmitted() && $formDescription->isValid()){
+
+        $em->flush();
+
+        return $this->redirectToRoute('user_adress');
+
         }
-
-        $formDescription = $descriptionService->addDescription($currentUser);
         $descriptions = $descriptionRepository->findUserDescription($currentUser);
 
-        return $this->render('user/user.html.twig', [
+        return $this->render('user/updateDescription.html.twig', [
             'form' => $formDescription,
             'descriptions' => $descriptions
         ]);
     }
 
 
-
-
-
-
+// changer le mot de passe
     #[Route('/user/change-password', name: 'changePassword')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function changePassword(Request $request,

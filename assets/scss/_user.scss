@@ -3,13 +3,31 @@
     width: 100%;
     @extend.flex-row;
     .user-menu{
-        width: 25%;
+        width: 20%;
         height: 85vh;
-        background-color: #d26262;;
+        padding: 30px 30px;
+        border-right: 2px solid $gray;
+        nav{
+          height: 100%;
+            @extend.flex-column;
+            justify-content: center;
+            align-items: center;
+            font-size: large;
+            line-height: 2.9;
+            h3{
+              padding: 10px;
+              transition: transform 0.3s ease; // Add a smooth transition effect
+
+              &:hover {
+                transform: scale(1.1); // Enlarge the link on hover
+              }
+            }
+
+        }
     }
     .user-content{
-        width: 75%;
-        
+        width: 80%;
+        margin-top: 4vh;
         .adress-content {
             width: 100%;
             height: 30vh;
@@ -18,8 +36,8 @@
             align-items: center;
           
             .add-new-adress {
-              width: 20%;
-              height: 25vh;
+              width: 25%;
+              height: 35vh;
               background-color: $gray-light;
               border: 4px dashed $gray;
               border-radius: 15px;
@@ -27,6 +45,16 @@
               justify-content: center;
               align-items: center;
               cursor: pointer;
+              .go-back{
+                width: 100%;
+                img{
+                    width: 30px;
+                    height: 30px;
+                    position: relative;
+                    left: 90%;
+                    top: -50%;
+                }
+              }
           
               .add {
                 width: 100%;
@@ -39,23 +67,6 @@
                   height: 80px;
                 }
               }
-            }
-          
-            .modal-content {
-                width: 20%;
-                height: 25vh;
-                background-color: $gray-light;
-                display: none; // Caché par défaut
-                position: fixed;
-                top: 30%;
-                left: 62%;
-                line-height: 1.5;
-                transform: translate(-50%, -50%);
-                padding: 20px;
-                border: 1px solid black;
-                border-radius: 15px;
-                box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
-                z-index: 1000; // Valeur plus élevée que celle de .add-new-adress
             }
           }
         .adress-show{
