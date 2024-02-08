@@ -39,7 +39,7 @@
         {{ app.user.fullname }} <br />
         {{ description.adress }} <br />
         {{ description.city }}, {{ description.postalcode }} <br />
-        {{ description.country }} <br />
+        {{ description.country |country_name ('fr')}} <br />
         Numéros de téléphone : {{ description.phone }}
       </div>
       {% endfor %}
