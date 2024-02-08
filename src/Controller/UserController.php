@@ -3,8 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Form\AdressUserType;
+use DateTimeImmutable;
 use App\Entity\AdressUser;
+use App\Form\AdressUserType;
 use App\Repository\AdressUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -127,12 +128,14 @@ class UserController extends AbstractController
             return $this->redirect($request->getUri());
         }
 
-        $adresss = $AdressUserRepository->find($id);
+        $adress = $AdressUserRepository->find($id);
 
-        $formAdress = $this->createForm(AdressUserType::class, $adresss);
+        $formAdress = $this->createForm(AdressUserType::class, $adress);
 
         $formAdress->handleRequest($request);
         if ($formAdress->isSubmitted() && $formAdress->isValid()) {
+
+            $adress->setUpdatedAt(new DateTimeImmutable());
 
             $em->flush();
 
@@ -199,6 +202,8 @@ class UserController extends AbstractController
                 $hash = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hash);
             }
+
+            $user->setUpdatedAt(new DateTimeImmutable());
             $em->flush();
 
             return $this->redirectToRoute('user');
