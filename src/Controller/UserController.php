@@ -3,10 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\User;
-use App\Entity\DescriptionUser;
-use App\Form\DescriptionUserType;
+use App\Form\AdressUserType;
+use App\Entity\AdressUser;
+use App\Repository\AdressUserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Repository\DescriptionUserRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -25,30 +25,25 @@ class UserController extends AbstractController
 
     #[Route('/user', name: 'user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function user(
-    
-    ): Response 
+    public function user(): Response
     {
 
 
-        return $this->render('user/index.html.twig', [
-            
-        ]);
+        return $this->render('user/index.html.twig', []);
     }
 
-    
+
     #[Route('/user/adress', name: 'user_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_adress(
-        DescriptionUserRepository $descriptionRepository,
+        AdressUserRepository $AdressUserRepository,
         UserInterface $currentUser
-    ): Response 
-    {
+    ): Response {
 
-        $descriptions = $descriptionRepository->findUserDescription($currentUser);
+        $adress = $AdressUserRepository->findUserAdress($currentUser);
 
         return $this->render('user/user_adress.html.twig', [
-            'descriptions' => $descriptions,
+            'adresss' => $adress,
         ]);
     }
 
@@ -59,97 +54,95 @@ class UserController extends AbstractController
         Request $request,
         EntityManagerInterface $em,
         UserInterface $user,
-        DescriptionUserRepository $descriptionRepository,
+        AdressUserRepository $AdressUserRepository,
         UserInterface $currentUser,
-    ): Response 
-    {
+    ): Response {
 
-        $newDescription = new DescriptionUser();
+        $newAdresss = new AdressUser();
 
-        $addDescriptionForm = $this->createForm(DescriptionUserType::class, $newDescription);
-        
+        $addAdressForm = $this->createForm(AdressUserType::class, $newAdresss);
 
-        $addDescriptionForm->handleRequest($request);
 
-        if ($addDescriptionForm->isSubmitted() && $addDescriptionForm->isValid()) {
+        $addAdressForm->handleRequest($request);
 
-            $newDescription->setAuthor($user);
+        if ($addAdressForm->isSubmitted() && $addAdressForm->isValid()) {
 
-            
-            $em->persist($newDescription);
+            $newAdresss->setAuthor($user);
+
+
+            $em->persist($newAdresss);
             $em->flush();
 
             return $this->redirectToRoute('user_adress');
-
         }
 
-        $descriptions = $descriptionRepository->findUserDescription($currentUser);
+        $adress = $AdressUserRepository->findUserAdress($currentUser);
 
         return $this->render('user/add_user_adress.html.twig', [
-            'form' => $addDescriptionForm->createView(),
-            'descriptions' => $descriptions,
+            'form' => $addAdressForm->createView(),
+            'adresss' => $adress,
         ]);
     }
 
-// suprimer une adress
-    #[Route('/user/remove_description/{id}', name: 'remove-description')]
+    // suprimer une adress
+    #[Route('/user/remove_adress/{id}', name: 'remove_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function removeFriend(int $id,
-    Request $request,
-    DescriptionUserRepository $descriptionRepository,
-    EntityManagerInterface $em):Response
-    {
+    public function removeFriend(
+        int $id,
+        Request $request,
+        AdressUserRepository $AdressUserRepository,
+        EntityManagerInterface $em
+    ): Response {
         $currentUser = $this->getUser();
 
-        if(!$currentUser){
+        if (!$currentUser) {
             return $this->redirect($request->getUri());
-
         }
 
-        $description = $descriptionRepository->find($id);
+        $adress = $AdressUserRepository->find($id);
 
-        if ($description) {
-            $em->remove($description);
+        if ($adress) {
+            $em->remove($adress);
             $em->flush();
         }
         $referer = $request->server->get('HTTP_REFERER');
         return $referer ? $this->redirect($referer) : $this->redirect(('user'));
     }
 
-// modifier une adress
-    #[Route('/user/edit_description/{id}', name: 'edit-description')]
+    // modifier une adress
+    #[Route('/user/edit_adress/{id}', name: 'edit_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function editDescription(int $id, Request $request,
-    EntityManagerInterface $em,
-    DescriptionUserRepository $descriptionRepository): Response
-    {
-         /**
+    public function editDescription(
+        int $id,
+        Request $request,
+        EntityManagerInterface $em,
+        AdressUserRepository $AdressUserRepository
+    ): Response {
+        /**
          * @var User
          */
         $currentUser = $this->getUser();
 
-        if(!$currentUser){
+        if (!$currentUser) {
             return $this->redirect($request->getUri());
-
         }
 
-        $description = $descriptionRepository->find($id);
+        $adresss = $AdressUserRepository->find($id);
 
-        $formDescription =$this->createForm(DescriptionUserType::class, $description);
-        
-        $formDescription->handleRequest($request);
-        if($formDescription->isSubmitted() && $formDescription->isValid()){
+        $formAdress = $this->createForm(AdressUserType::class, $adresss);
 
-        $em->flush();
+        $formAdress->handleRequest($request);
+        if ($formAdress->isSubmitted() && $formAdress->isValid()) {
 
-        return $this->redirectToRoute('user_adress');
+            $em->flush();
 
+            return $this->redirectToRoute('user_adress');
         }
-        $descriptions = $descriptionRepository->findUserDescription($currentUser);
+        $adress = $AdressUserRepository->findUserAdress($currentUser);
 
         return $this->render('user/updateDescription.html.twig', [
-            'form' => $formDescription,
-            'descriptions' => $descriptions
+            'form' => $formAdress,
+            'adresss' => $adress
         ]);
     }
 
@@ -157,54 +150,51 @@ class UserController extends AbstractController
 
     #[Route('/user/commande', name: 'user_commande')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function user_commande(
-    
-    ): Response 
+    public function user_commande(): Response
     {
 
 
-        return $this->render('user/userCommande.html.twig', [
-            
-        ]);
+        return $this->render('user/userCommande.html.twig', []);
     }
 
 
 
 
-// changer le mot de passe
+    // changer le mot de passe
     #[Route('/user/change-password', name: 'changePassword')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function changePassword(Request $request,
-     EntityManagerInterface $em,
-     UserPasswordHasherInterface $passwordHasher,
-     ): Response
-    {
-        
-         /**
+    public function changePassword(
+        Request $request,
+        EntityManagerInterface $em,
+        UserPasswordHasherInterface $passwordHasher,
+    ): Response {
+
+        /**
          * @var User
          */
-        $user =$this->getUser();
-        
+        $user = $this->getUser();
+
         $passwordForm = $this->createFormBuilder()
-                         ->add('newPassword' , RepeatedType::class, [
-                            'type' => PasswordType::class,
-                            'constraints' => [
-                                new NotBlank(['message' => 'Veuillez entrez deux mot de passe Identique']),
-                                new Length([
-                                    'min' => 5,
-                                    'minMessage' => 'Veuillez entrez plus de 5 catactéres'])
-                                ],
-                            'invalid_message' => 'Les champs des mots de passe doivent correspondre.',
-                            'required' => false,
-                            'first_options'  => ['label' => 'Nouveau mot de passe'],
-                            'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
-                        ])
-                        ->getForm();
-        
+            ->add('newPassword', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'constraints' => [
+                    new NotBlank(['message' => 'Veuillez entrez deux mot de passe Identique']),
+                    new Length([
+                        'min' => 5,
+                        'minMessage' => 'Veuillez entrez plus de 5 catactéres'
+                    ])
+                ],
+                'invalid_message' => 'Les champs des mots de passe doivent correspondre.',
+                'required' => false,
+                'first_options'  => ['label' => 'Nouveau mot de passe'],
+                'second_options' => ['label' => 'Confirmer le nouveau mot de passe'],
+            ])
+            ->getForm();
+
         $passwordForm->handleRequest($request);
-        if($passwordForm->isSubmitted() && $passwordForm->isValid()){
+        if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
             $newPassword = $passwordForm->get('newPassword')->getData();
-            
+
             if ($newPassword) {
                 $hash = $passwordHasher->hashPassword($user, $newPassword);
                 $user->setPassword($hash);
@@ -212,14 +202,12 @@ class UserController extends AbstractController
             $em->flush();
 
             return $this->redirectToRoute('user');
-            
         }
         return $this->render('user/changePassword.html.twig', [
             'form' => $passwordForm->createView(),
-             
+
 
 
         ]);
     }
-    
 }

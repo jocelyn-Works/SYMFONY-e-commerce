@@ -2,17 +2,17 @@
 
 namespace App\Controller\Admin;
 
-use DateTime;
+
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -41,7 +41,7 @@ class UserCrudController extends AbstractCrudController
 
             TextField::new('lastname'),
 
-            TextField::new('email'),
+            EmailField::new('email'),
             // ->setFormTypeOption('disabled', 'disabled') 
 
             ArrayField::new('roles')
@@ -50,7 +50,7 @@ class UserCrudController extends AbstractCrudController
             DateTimeField::new('createdAt'),
             // ->setFormTypeOption('disabled', 'disabled'),
 
-            AssociationField::new('descriptionUsers')
+            AssociationField::new('AdressUsers')
             ->setLabel('Adress Utilisateurs')
             ->hideOnForm(),
             

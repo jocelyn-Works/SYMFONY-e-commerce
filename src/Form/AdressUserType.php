@@ -4,7 +4,7 @@ namespace App\Form;
 
 use DateTime;
 use App\Entity\User;
-use App\Entity\DescriptionUser;
+use App\Entity\AdressUser;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -12,7 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\CountryType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 
-class DescriptionUserType extends AbstractType
+class AdressUserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -38,7 +38,7 @@ class DescriptionUserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => DescriptionUser::class,
+            'data_class' => AdressUser::class,
         ]);
     }
 }

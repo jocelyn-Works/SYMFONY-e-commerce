@@ -2,21 +2,20 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\DescriptionUser;
-use App\Controller\UserController;
+use App\Entity\AdressUser;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class DescriptionUserCrudController extends AbstractCrudController
+class AdressUserCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return DescriptionUser::class;
+        return AdressUser::class;
     }
 
     public function configureCrud(Crud $crud): Crud

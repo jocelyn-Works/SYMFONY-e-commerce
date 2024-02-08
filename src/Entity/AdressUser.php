@@ -2,20 +2,19 @@
 
 namespace App\Entity;
 
-use App\Repository\DescriptionUserRepository;
-use Doctrine\DBAL\Types\Types;
+use App\Repository\AdressUserRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: DescriptionUserRepository::class)]
-class DescriptionUser
+#[ORM\Entity(repositoryClass: AdressUserRepository::class)]
+class AdressUser
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\ManyToOne(inversedBy: 'descriptionUsers')]
+    #[ORM\ManyToOne(inversedBy: 'AdressUsers')]
     private ?User $author = null;
 
     #[ORM\Column(length: 255)]
@@ -59,6 +58,7 @@ class DescriptionUser
     private ?string $phone = null;
 
         
+    
 
     public function getId(): ?int
     {

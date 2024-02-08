@@ -18,25 +18,25 @@
       </div>
     </div>
     <div class="adress-show">
-      {% for description in descriptions %} {#
+      {% for adress in adresss %} {#
       {{ description.birthdate | format_datetime(pattern= 'd MM Y', locale='fr') }}
       <br />
       #}
       <div class="adress">
-        <div class="remove-update-description">
-          <div class="update-description">
-            <a href="{{path('edit-description', {'id': description.id}) }}"><img src="{{asset ('build/images/icons/pen-to-square-regular.svg')}}" alt=""></a>
+        <div class="remove-update-adress">
+          <div class="update-adress">
+            <a href="{{path('edit_adress', {'id': adress.id}) }}"><img src="{{asset ('build/images/icons/pen-to-square-regular.svg')}}" alt=""></a>
           </div>
           <div class=""></div>
-          <div class="remove-description">
-            <a href="{{path('remove-description', {'id': description.id}) }}" class=""><img src="{{asset ('build/images/icons/circle-xmark-regular.svg')}}" alt=""></a>
+          <div class="remove-adress">
+            <a href="{{path('remove_adress', {'id': adress.id}) }}" class=""><img src="{{asset ('build/images/icons/circle-xmark-regular.svg')}}" alt=""></a>
           </div>
         </div>
         {{ app.user.fullname }} <br />
-        {{ description.adress }} <br />
-        {{ description.city }}, {{ description.postalcode }} <br />
-        {{ description.country |country_name ('fr') }} <br />
-        Numéros de téléphone : {{ description.phone }}
+        {{ adress.adress }} <br />
+        {{ adress.city }}, {{ adress.postalcode }} <br />
+        {{ adress.country |country_name ('fr') }} <br />
+        Numéros de téléphone : {{ adress.phone }}
       </div>
       {% endfor %}
     </div>

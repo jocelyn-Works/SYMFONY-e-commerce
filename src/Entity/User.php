@@ -51,8 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: DescriptionUser::class)]
-    private Collection $descriptionUsers;
+    #[ORM\OneToMany(mappedBy: 'author', targetEntity: AdressUser::class)]
+    private Collection $AdressUsers;
 
    
 
@@ -65,7 +65,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->roles = ['ROLE_USER'];
         $this->createdAt = new \DateTimeImmutable();
-        $this->descriptionUsers = new ArrayCollection();
+        $this->AdressUsers = new ArrayCollection();
     }
 
     
@@ -183,27 +183,27 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection<int, DescriptionUser>
      */
-    public function getDescriptionUsers(): Collection
+    public function getAdressUsers(): Collection
     {
-        return $this->descriptionUsers;
+        return $this->AdressUsers;
     }
 
-    public function addDescriptionUser(DescriptionUser $descriptionUser): static
+    public function addAdressUser(AdressUser $AdressUser): static
     {
-        if (!$this->descriptionUsers->contains($descriptionUser)) {
-            $this->descriptionUsers->add($descriptionUser);
-            $descriptionUser->setAuthor($this);
+        if (!$this->AdressUsers->contains($AdressUser)) {
+            $this->AdressUsers->add($AdressUser);
+            $AdressUser->setAuthor($this);
         }
 
         return $this;
     }
 
-    public function removeDescriptionUser(DescriptionUser $descriptionUser): static
+    public function removeAdressUser(AdressUser $AdressUser): static
     {
-        if ($this->descriptionUsers->removeElement($descriptionUser)) {
+        if ($this->AdressUsers->removeElement($AdressUser)) {
             // set the owning side to null (unless already changed)
-            if ($descriptionUser->getAuthor() === $this) {
-                $descriptionUser->setAuthor(null);
+            if ($AdressUser->getAuthor() === $this) {
+                $AdressUser->setAuthor(null);
             }
         }
 

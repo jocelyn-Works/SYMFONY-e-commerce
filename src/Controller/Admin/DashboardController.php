@@ -2,7 +2,7 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\DescriptionUser;
+use App\Entity\AdressUser;
 use App\Entity\User;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,7 +45,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', DescriptionUser::class);
+        yield MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class);
 
     }
 }
