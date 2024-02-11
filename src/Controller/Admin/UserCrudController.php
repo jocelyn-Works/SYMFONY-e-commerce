@@ -4,18 +4,28 @@ namespace App\Controller\Admin;
 
 
 use App\Entity\User;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use Doctrine\ORM\EntityManagerInterface;
 
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 
 class UserCrudController extends AbstractCrudController
 {
+
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public static function getEntityFqcn(): string
     {
         return User::class;
@@ -47,14 +57,32 @@ class UserCrudController extends AbstractCrudController
             ArrayField::new('roles')
                 ->hideOnIndex(),
 
-            DateTimeField::new('createdAt'),
+            TextField::new('password'),
+
+            TextField::new('condition_user')
+                ->setFormTypeOption('data', 'ACCEPTED'),
+
+
+
+            DateTimeField::new('updatedAt'),
             // ->setFormTypeOption('disabled', 'disabled'),
 
             AssociationField::new('AdressUsers')
                 ->setLabel('Adress Utilisateurs')
                 ->hideOnForm(),
-            
+
         ];
+
+
+    }
+        public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        // Appelé avant la mise à jour de l'entité dans la base de données
+        if ($entityInstance instanceof User) {
+            $entityInstance->setUpdatedAt(new \DateTimeImmutable());
+            $this->entityManager->persist($entityInstance);
+            $this->entityManager->flush();
+        }
     }
 
 }

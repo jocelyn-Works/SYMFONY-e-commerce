@@ -24,21 +24,22 @@ class Product
     #[ORM\Column]
     private ?int $price = null;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ImageProduct::class,
+    orphanRemoval: true, cascade:['persist'])]
+    private Collection $images;
+
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
-    #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductImage::class,
-    orphanRemoval: true, cascade:['persist'])]
-    private Collection $productImages;
 
     public function __construct()
     {
     
         $this->createdAt = new \DateTimeImmutable();
-        $this->productImages = new ArrayCollection();
+        $this->images = new ArrayCollection();
         
     }
 
@@ -110,24 +111,24 @@ class Product
     /**
      * @return Collection<int, ProductImage>
      */
-    public function getProductImages(): Collection
+    public function getImages(): Collection
     {
-        return $this->productImages;
+        return $this->images;
     }
 
-    public function addProductImage(ProductImage $productImage): static
+    public function addImage(ImageProduct $productImage): static
     {
-        if (!$this->productImages->contains($productImage)) {
-            $this->productImages->add($productImage);
+        if (!$this->images->contains($productImage)) {
+            $this->images->add($productImage);
             $productImage->setProduct($this);
         }
 
         return $this;
     }
 
-    public function removeProductImage(ProductImage $productImage): static
+    public function removeImage(ImageProduct $productImage): static
     {
-        if ($this->productImages->removeElement($productImage)) {
+        if ($this->images->removeElement($productImage)) {
             // set the owning side to null (unless already changed)
             if ($productImage->getProduct() === $this) {
                 $productImage->setProduct(null);

@@ -2,15 +2,16 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\AdressUser;
-use App\Entity\Product;
-use App\Entity\ProductImage;
 use App\Entity\User;
+use App\Entity\Product;
+use App\Entity\AdressUser;
+use App\Entity\ImageProduct;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class DashboardController extends AbstractDashboardController
@@ -22,7 +23,7 @@ class DashboardController extends AbstractDashboardController
         // Option 1. You can make your dashboard redirect to some common page of your backend
         //
         // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
+        // return $this->redirect($adminUrlGenerator->setController(ProductCrudController::class)->generateUrl());
 
         // Option 2. You can make your dashboard redirect to different pages depending on the user
         //
@@ -50,7 +51,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
         yield MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class);
         yield MenuItem::linkToCrud('Produits', 'fas fa-shirt', Product::class);
-        yield MenuItem::linkToCrud('Images Produits', 'fas fa-image', ProductImage::class);
+        yield MenuItem::linkToCrud('Images Produits', 'fas fa-image', ImageProduct::class);
         
 
 

@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use App\Entity\ImageProduct;
 use App\Entity\ProductImage;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<ProductImage>
@@ -14,11 +15,11 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method ProductImage[]    findAll()
  * @method ProductImage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ProductImageRepository extends ServiceEntityRepository
+class ImageProductRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, ProductImage::class);
+        parent::__construct($registry, ImageProduct::class);
     }
 
 //    /**

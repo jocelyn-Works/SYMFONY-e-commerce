@@ -3,16 +3,24 @@
 namespace App\Controller\Admin;
 
 use App\Entity\AdressUser;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class AdressUserCrudController extends AbstractCrudController
 {
+
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+    
     public static function getEntityFqcn(): string
     {
         return AdressUser::class;
@@ -60,6 +68,16 @@ class AdressUserCrudController extends AbstractCrudController
 
             
         ];
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        // Appelé avant la mise à jour de l'entité dans la base de données
+        if ($entityInstance instanceof AdressUser) {
+            $entityInstance->setUpdatedAt(new \DateTimeImmutable());
+            $this->entityManager->persist($entityInstance);
+            $this->entityManager->flush();
+        }
     }
     
 }

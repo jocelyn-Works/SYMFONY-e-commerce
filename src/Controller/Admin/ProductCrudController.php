@@ -3,18 +3,27 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Product;
+use App\Form\ImageProductType;
+use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ProductCrudController extends AbstractCrudController
 {
+
+    private EntityManagerInterface $entityManager;
+
+    public function __construct(EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     public static function getEntityFqcn(): string
     {
         return Product::class;
@@ -41,11 +50,9 @@ class ProductCrudController extends AbstractCrudController
 
             MoneyField::new('price')->setCurrency('EUR'),
 
-            ImageField::new('productImages')
-                ->setBasePath('uploads/images') // Chemin vers le répertoire des images
-                ->setUploadDir('public/uploads/') // Répertoire d'upload des images
-                ->setLabel('Product Images')
-                ->onlyOnForms(),
+            CollectionField::new('images')
+                ->setLabel('image')
+                ->setEntryType(ImageProductType::class),
 
             DateTimeField::new('createdAt')
                 ->hideOnForm(),
@@ -53,5 +60,15 @@ class ProductCrudController extends AbstractCrudController
             DateTimeField::new('updatedAt')
                 ->hideOnForm(),
         ];
+    }
+
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    {
+        // Appelé avant la mise à jour de l'entité dans la base de données
+        if ($entityInstance instanceof Product) {
+            $entityInstance->setUpdatedAt(new \DateTimeImmutable());
+            $this->entityManager->persist($entityInstance);
+            $this->entityManager->flush();
+        }
     }
 }
