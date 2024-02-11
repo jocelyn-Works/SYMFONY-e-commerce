@@ -43,6 +43,11 @@ class Product
         
     }
 
+    public function __toString()
+    {
+        return $this->name; // ou tout autre champ que vous souhaitez afficher
+    }
+
     public function getId(): ?int
     {
         return $this->id;

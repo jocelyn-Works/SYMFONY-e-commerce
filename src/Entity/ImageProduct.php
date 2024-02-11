@@ -44,6 +44,11 @@ class ImageProduct
         
     }
 
+    public function __toString()
+    {
+        return $this->name; // ou tout autre champ que vous souhaitez afficher
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -127,8 +132,4 @@ class ImageProduct
         return $this;
     }
 
-    public function __tostring(): string
-    {
-        return $this->name;
-    }
 }
