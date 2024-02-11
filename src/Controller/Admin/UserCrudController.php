@@ -25,7 +25,7 @@ class UserCrudController extends AbstractCrudController
     {
         return $crud
             ->setEntityLabelInPlural('Utilisateurs') //  nom de la table a afficher
-            ->setEntityLabelInSingular('Utilisateur') // crée un utilisateur 
+            ->setEntityLabelInSingular('Ajouter un Utilisateur') // crée un utilisateur 
             ->setPageTitle("index", " E-commerce - Administration Utilisateurs") // titre page 
             ->setPaginatorPageSize(10); // 10 utilisateurs
     }
