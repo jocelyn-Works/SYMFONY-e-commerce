@@ -57,6 +57,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\Column(length: 10)]
+    #[Assert\NotBlank(message: "Veuillez accepter les condition.")]
+    private ?string $condition_user = null;
+
    
 
     public function __toString(): string
@@ -221,6 +225,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUpdatedAt(?\DateTimeImmutable $updatedAt): static
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getConditionUser(): ?string
+    {
+        return $this->condition_user;
+    }
+
+    public function setConditionUser(?string $condition_user): static
+    {
+        $this->condition_user = $condition_user;
 
         return $this;
     }

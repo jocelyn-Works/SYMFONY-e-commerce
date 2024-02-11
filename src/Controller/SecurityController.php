@@ -38,6 +38,8 @@ private EntityManagerInterface $em;
             $hash = $passwordHasher->hashPassword($user, $user->getPassword());
             $user->setPassword($hash);
 
+            $user->setConditionUser('ACCEPTED');
+
             $this->em->persist($user);
             $this->em->flush();
 
