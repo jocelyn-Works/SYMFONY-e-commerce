@@ -19,7 +19,7 @@ class ImageProduct
     #[Vich\UploadableField(mapping: 'products', fileNameProperty: 'name', size: 'size')]
     private ?File $file = null;
 
-    #[ORM\ManyToOne(inversedBy: 'productImages')]
+    #[ORM\ManyToOne(inversedBy: 'images',targetEntity: Product::class)]
     #[ORM\JoinColumn(nullable: false)]
     private ?product $product = null;
 

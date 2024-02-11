@@ -20,8 +20,10 @@ class ImageProductCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id'),
-            TextField::new('title'),
-            TextEditorField::new('description'),
+
+            TextField::new('name'),
+            
+            TextEditorField::new('size'),
         ];
     }
 
