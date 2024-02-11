@@ -31,7 +31,7 @@ class ProductImageCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-            ->hideOnForm(),
+                ->hideOnForm(),
 
             TextField::new('product'),
 

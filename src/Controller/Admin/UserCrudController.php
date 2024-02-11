@@ -35,7 +35,7 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-            ->hideOnForm(),
+                ->hideOnForm(),
 
             TextField::new('firstname'),
 
@@ -45,14 +45,14 @@ class UserCrudController extends AbstractCrudController
             // ->setFormTypeOption('disabled', 'disabled') 
 
             ArrayField::new('roles')
-            ->hideOnIndex(),
+                ->hideOnIndex(),
 
             DateTimeField::new('createdAt'),
             // ->setFormTypeOption('disabled', 'disabled'),
 
             AssociationField::new('AdressUsers')
-            ->setLabel('Adress Utilisateurs')
-            ->hideOnForm(),
+                ->setLabel('Adress Utilisateurs')
+                ->hideOnForm(),
             
         ];
     }

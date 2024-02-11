@@ -4,13 +4,14 @@ namespace App\Controller\Admin;
 
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
-use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -27,12 +28,12 @@ class ProductCrudController extends AbstractCrudController
             ->setPageTitle("index", " E-commerce - Administration Produit") // titre page 
             ->setPaginatorPageSize(10); // 10 utilisateurs
     }
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')
-            ->hideOnForm(),
+                ->hideOnForm(),
 
             TextField::new('name'),
 
@@ -40,10 +41,17 @@ class ProductCrudController extends AbstractCrudController
 
             MoneyField::new('price')->setCurrency('EUR'),
 
-            DateTimeField::new('createdAt'),
+            ImageField::new('productImages')
+                ->setBasePath('uploads/images') // Chemin vers le répertoire des images
+                ->setUploadDir('public/uploads/') // Répertoire d'upload des images
+                ->setLabel('Product Images')
+                ->onlyOnForms(),
 
-            DateTimeField::new('updatedAt'),
+            DateTimeField::new('createdAt')
+                ->hideOnForm(),
+
+            DateTimeField::new('updatedAt')
+                ->hideOnForm(),
         ];
     }
-    
 }
