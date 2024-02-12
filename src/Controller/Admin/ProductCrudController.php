@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
 
 class ProductCrudController extends AbstractCrudController
 {
@@ -32,10 +33,15 @@ class ProductCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setEntityLabelInPlural('Utilisateurs') //  nom de la table a afficher
+            ->setEntityLabelInPlural('Produits') //  nom de la table a afficher
+
             ->setEntityLabelInSingular('Ajouter un produit')       // crée un produit
+
             ->setPageTitle("index", " E-commerce - Administration Produit") // titre page 
+
             ->setPaginatorPageSize(10); // 10 utilisateurs
+
+
     }
 
     public function configureFields(string $pageName): iterable
