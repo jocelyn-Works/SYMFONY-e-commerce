@@ -1,15 +1,33 @@
 {% extends 'base.html.twig' %}
- {% block title %}Hello
-ProductController!{%endblock %}
-{% block body %}
-    {% for product in products %}
-        {{ product.name }}
-        {{ product.description }}
-        {{ (product.price / 100) | number_format(2, '.', ',') }} €
-        {% for image in product.images %}
-        <div class="">
-            <img src="{{ asset('uploads/products/' ~ image.name) }}" />
-        </div>
-    {% endfor %}
-    {% endfor %}
+ {% block title %}HelloProductController!{%endblock %}
+ {% block body %}
+ <div class="product-header"></div>
+<div class="product-content">
+  <div class="product-menu">
+    <nav></nav>
+  </div>
+
+  <div class="product-cart">
+        {% for product in products %}
+            <div class="cart">
+                <a href="{{path('product_show', {id: product.id})}}">
+                <div class="product-img">
+                    {% for loopIndex, image in product.images %}
+                        <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex > 0 %}style="display: none;"{% endif %} />
+                    {% endfor %}
+                </div>
+                <div class="product-description">
+                    <ul>
+                        <li>{{ product.name }}</li>
+                        <li>{{ (product.price / 100) | number_format(2, '.', ',') }} € </li>
+                    </ul>
+                    
+                </div>
+            </a>
+            </div>
+        {% endfor %}
+  </div>
+
+</div>
+
 {% endblock %}

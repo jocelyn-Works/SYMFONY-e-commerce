@@ -3,5 +3,15 @@
 {% block title %}Hello ProductController!{% endblock %}
 
 {% block body %}
+{% for product in products %}
+{{ product.name }}
+{{ product.description }}
+{{ (product.price / 100) | number_format(2, '.', ',') }} €
+{% for image in product.images %}
+    <div class="">
+        <img src="{{ asset('uploads/products/' ~ image.name) }}" />
+    </div>
+{% endfor %}
+{% endfor %}
 
 {% endblock %}
