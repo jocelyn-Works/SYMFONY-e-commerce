@@ -18,12 +18,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Form\Type\TextEditorType;
 class ProductCrudController extends AbstractCrudController
 {
 
-    private EntityManagerInterface $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
-    }
+   
 
     public static function getEntityFqcn(): string
     {
@@ -68,13 +63,5 @@ class ProductCrudController extends AbstractCrudController
         ];
     }
 
-    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
-    {
-        // Appelé avant la mise à jour de l'entité dans la base de données
-        if ($entityInstance instanceof Product) {
-            $entityInstance->setUpdatedAt(new \DateTimeImmutable());
-            $this->entityManager->persist($entityInstance);
-            $this->entityManager->flush();
-        }
-    }
+  
 }

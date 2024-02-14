@@ -16,7 +16,7 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', []);
     }
 
-    #[Route('/M/hommes', name: 'product_Men')]
+    #[Route('/hommes-chaussures', name: 'product_Men')]
     public function Men(
         ProductRepository $productrepositoty,
         ImageProductRepository $imageProductrepository
@@ -30,8 +30,8 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/product/{id}', name: 'product_show')]
-    public function Productid(int $id, ProductRepository $productRepository, ImageProductRepository $imageProductRepository): Response
+    #[Route('/hommes-chaussures/{id}', name: 'product_show')]
+    public function Productid(int $id, ProductRepository $productRepository): Response
     {
         $product = $productRepository->findProductWithImages($id);
 

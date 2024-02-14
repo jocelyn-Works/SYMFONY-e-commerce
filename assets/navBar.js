@@ -1,3 +1,27 @@
+
+
+// scroll nav bar 
+
+// let prevScrollPos = window.pageYOffset;
+// const navbar = document.getElementById('navbar');
+
+// window.onscroll = function() {
+//     let currentScrollPos = window.pageYOffset;
+
+//     if (prevScrollPos > currentScrollPos) {
+//         // L'utilisateur fait défiler vers le haut
+//         navbar.style.top = "0";
+//     } else {
+//         // L'utilisateur fait défiler vers le bas
+//         navbar.style.top = `-${navbar.offsetHeight}px`; // masquer la barre de navigation
+//     }
+
+//     prevScrollPos = currentScrollPos;
+// }
+
+
+// user menu 
+
 (function () {
     const userIcon = document.getElementById('userIcon');
     const userMenu = document.querySelector('.user-menu');
@@ -23,39 +47,8 @@
     });
 })();
 
-// document.addEventListener('DOMContentLoaded', function() {
-//     // Attachez un gestionnaire d'événements à tous les éléments avec la classe "tab-links"
-//     document.querySelectorAll('.tab-links').forEach(function(tabLink) {
-//         tabLink.addEventListener('click', function(event) {
-//             var tabName = event.target.dataset.tabname;
-//             opentab(event, tabName);
-//         });
-//     });
-// });
 
-// window.opentab = function(event, tabname) {
-//     console.log('Function opentab called with tabname:', tabname);
-
-//     // Désactive toutes les classes "active-link" sur les liens de tab
-//     document.querySelectorAll('.tab-links').forEach(function(tablink) {
-//         tablink.classList.remove("active-link");
-//     });
-
-//     // Désactive toutes les classes "active-tab" sur les contenus de tab
-//     document.querySelectorAll('.tab-contents').forEach(function(tabcontent) {
-//         tabcontent.classList.remove("active-tab");
-//     });
-
-//     // Active la classe "active-link" sur le lien actuel
-//     event.currentTarget.classList.add("active-link");
-
-//     // Active la classe "active-tab" sur le contenu correspondant
-//     var selectedTab = document.getElementById(tabname);
-//     if (selectedTab) {
-//         selectedTab.classList.add("active-tab");
-//     }
-// };
-
+// sous menu 
 
 document.addEventListener('DOMContentLoaded', function() {
     // Attachez un gestionnaire d'événements à tous les éléments avec la classe "tab-links"
