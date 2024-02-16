@@ -21,19 +21,27 @@
 
             }
             .custom_checkbox{
+                width: 100%;
                 margin: 3vh 2vh ;
+                .content-checkbox{
+                    width: 10%;
+
+                }
 
                 .condition{
-                    margin-left: 5px;
-                }
-                p{
-                    font-size: large;
-                    padding: 5px 70px 0 20px;
-                    a{
-                        text-decoration:underline;
+                    width: 90%;
+                    
+                    p{
+                        // @extend.flex-justify-c;
+                        font-size: large;
+                        line-height: 1.5;
+                        // padding: 5px 70px 0 20px;
+                        a{
+                            text-decoration:underline;
+                        }
                     }
                 }
-
+                    
             }
             label {
                 display: block;
@@ -82,6 +90,9 @@
               }
             }
           }
+          a:hover{
+            text-decoration:underline;
+        }
         }
     }
 }

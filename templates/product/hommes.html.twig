@@ -11,19 +11,19 @@
         {% for product in products %}
             <div class="cart">
                 <a href="{{path('product_show', {id: product.id})}}">
-                <div class="product-img">
-                    {% for loopIndex, image in product.images %}
-                        <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex > 0 %}style="display: none;"{% endif %} />
-                    {% endfor %}
-                </div>
-                <div class="product-description">
-                    <ul>
-                        <li>{{ product.name }}</li>
-                        <li>{{ (product.price / 100) | number_format(2, '.', ',') }} € </li>
-                    </ul>
-                    
-                </div>
-            </a>
+                    <div class="product-img">
+                        {% for loopIndex, image in product.images %}
+                            <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex > 0 %}style="display: none;"{% endif %} />
+                        {% endfor %}
+                    </div>
+                    <div class="product-description">
+                        <ul>
+                            <li>{{ product.name }}</li>
+                            <li>{{ (product.price / 100) | number_format(2, '.', ',') }} € </li>
+                        </ul>
+                        
+                    </div>
+                </a>
             </div>
         {% endfor %}
   </div>

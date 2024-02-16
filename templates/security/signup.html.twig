@@ -12,7 +12,7 @@
     <div class="security-form">
             {{ form_start(form) }}
     
-            <div class="row">
+            <div class="row-betwen">
                 <div class="form-group-row">
                     {{ form_label(form.lastname) }}
                     {{ form_widget(form.lastname) }}
@@ -34,26 +34,22 @@
                 {{ form_label(form.birthdate) }}
                 {{ form_widget(form.birthdate) }}
             </div>
-            {# <div class="form-condition">
-                <div class="row">
-                    {{ form_widget(form.condition_user) }}
-                    <p>J'accepte les <a href="#">conditions d'utilisation</a> et je confirme avoir lu la <a href="#">politique de confidentialité de ...</a></p>
-                </div>
-            </div> #}
+           
             <div class="custom_checkbox">
-        
-                  {{ form_widget(form.condition_user, {'attr': {'class': 'custom_checkbox'}}) }}
-                  <label for="{{ form.condition_user.vars.id }}">
+                {{ form_widget(form.condition_user, {'attr': {'class': 'custom_checkbox'}}) }}
+                <label for="{{ form.condition_user.vars.id }}">
                     <div class="row">
-                        <span></span>
+            
+                        <div class="content-checkbox">
+                            <span></span>
+                        </div>
                         <div class="condition">
-                            J'accepte les <a href="#">conditions d'utilisation</a> et je confirme avoir lu la <a href="#">politique de confidentialité de ...</a>
+                            <p>J'accepte les <a href="#">conditions d'utilisation</a> et je confirme avoir lu la <a
+                                    href="#">politique de confidentialité</a> de ...</p>
                         </div>
                     </div>
-                  </label>
-                
-              </div>
-    
+                </label>
+            </div>
             {{ form_rest(form) }}
             <div class="button">
                 <button class="btn btn-primary">Crée un Compte</button>
