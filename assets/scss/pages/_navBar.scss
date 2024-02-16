@@ -4,6 +4,7 @@ header {
   position: fixed;
   top: 0;
   left: 0;
+  z-index: 100;
   @extend.flex-column;
   background-color: $NAV-background-color;
   nav {
@@ -120,17 +121,19 @@ header {
   .under-menu {
     width: 100%;
     @extend.flex-center;
-
+    position: relative;
+    z-index: 2;
     &.active-tab {
       display: flex;
     }
-
+    
     .tab-contents {
       width: 60%;
       background-color: $NAV-background-color;
       box-shadow: $box-shadow-product;
       display: none;
-
+      position: absolute;
+      z-index: 2;
       ul {
         list-style: none;
         padding: 0;

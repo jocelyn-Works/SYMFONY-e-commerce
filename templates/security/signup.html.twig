@@ -7,7 +7,11 @@
 
 <div class="form-content">
 
-    <div class="form-coroussel"></div>
+    <div class="form-coroussel" id="carousel-container">
+        {% for image in images %}
+        <img class="product-image" src="{{ asset('uploads/products/' ~ image.name) }}" />
+        {% endfor %}
+    </div>
 
     <div class="security-form">
             {{ form_start(form) }}
@@ -57,6 +61,7 @@
             {{ form_end(form) }}
     </div>
 </div>
+
 
 
     

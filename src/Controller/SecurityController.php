@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\ImageProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,8 @@ private EntityManagerInterface $em;
     #[Route('/signup', name: 'signup')]
     public function signup(Request $request,
     UserPasswordHasherInterface $passwordHasher,
-    UserAuthenticatorInterface $userAuthenticator
+    UserAuthenticatorInterface $userAuthenticator,
+    ImageProductRepository $imageProductRepository,
     ): Response
     {
         $user = new User();
@@ -43,20 +45,25 @@ private EntityManagerInterface $em;
             $this->em->persist($user);
             $this->em->flush();
 
-                // Connexion de l'utilisateur aprés inscription
+            
+            // Connexion de l'utilisateur aprés inscription
             return $userAuthenticator->authenticateUser($user, $this->formLoginAuthenticator, $request);
-
+            
+            
         }
+        $image = $imageProductRepository->findAll();
 
         return $this->render('security/signup.html.twig', [
-            'form' => $userForm->createView()
+            'form' => $userForm->createView(),
+            'images' => $image
         ]);
     }
 
      
     #[Route('/login', name: 'login')]
     public function login(
-        AuthenticationUtils $authenticationUtils
+        AuthenticationUtils $authenticationUtils,
+        ImageProductRepository $imageProductRepository
     ): Response
     {
          // erreur dauthentification 
@@ -64,9 +71,12 @@ private EntityManagerInterface $em;
          // récupère le nom entré par l'utilisateur lors de la derniére connxion
          $username = $authenticationUtils->getLastUsername();
 
+         $image = $imageProductRepository->findAll();
+
         return $this->render('security/login.html.twig', [
             'error' => $error,
-            'username' => $username
+            'username' => $username,
+            'images' => $image
         ]);
     }
 

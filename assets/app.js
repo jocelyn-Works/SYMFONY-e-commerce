@@ -10,3 +10,5 @@ import './scss/app.scss'
 
 import './js/navBar'
 import './js/productShow'
+import './js/imagesCarroussel'
+import './js/footer'
