@@ -6,8 +6,13 @@
 }
 
 
-@import './variables';
-@import './navBar';
-@import './user';
-@import './product';
-@import './productShow';
+@import './common/variables';
+@import './pages/navBar';
+@import './pages/securityForm';
+@import './pages/user';
+@import './pages/product';
+@import './pages/productShow';
+
+@import './components/button';
+@import './components/flex';
+@import './components/checbox';

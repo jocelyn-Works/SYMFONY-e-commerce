@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UserRepository;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -24,10 +25,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Veuillez renseigner une adresse mail.")]
     #[Assert\Email(message: "Veuillez renseigner une adresse mail valide.")]
     private ?string $email = null;
-
+    
     #[ORM\Column]
     private array $roles = [];
-
+    
     /**
      * @var string The hashed password
      */
@@ -35,31 +36,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Regex(
         pattern: '/^[a-zA-Z0-9!@#$%^&*(),.?:{}|]*$/',
         message: 'Le champ peut contenir des lettres majuscules, minuscules, chiffres et certains symboles.'
-    )] 
-    #[Assert\NotBlank(message: "Veuillez renseigner un mot de passe.")]
-    #[Assert\Length(min: 5, minMessage:" Le mot de passe doit faire plus de 5 caracteres.")]
-    private ?string $password = null;
+        )] 
+        #[Assert\NotBlank(message: "Veuillez renseigner un mot de passe.")]
+        #[Assert\Length(min: 5, minMessage:" Le mot de passe doit faire plus de 5 caracteres.")]
+        private ?string $password = null;
+        
+        #[ORM\Column(length: 255)]
+        #[Assert\NotBlank(message: "Veuillez renseigner votre prénom.")]
+        private ?string $firstname = null;
+        
+        #[ORM\Column(length: 255)]
+        #[Assert\NotBlank(message: "Veuillez renseigner votr nom.")]
+        private ?string $lastname = null;
+        
+        #[ORM\Column(type: Types::DATE_MUTABLE)]
+        private ?\DateTimeInterface $birthdate = null;
 
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Veuillez renseigner votre prénom.")]
-    private ?string $firstname = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Veuillez renseigner votr nom.")]
-    private ?string $lastname = null;
-
-    #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
-
-    #[ORM\OneToMany(mappedBy: 'author', targetEntity: AdressUser::class)]
-    private Collection $AdressUsers;
-
-    #[ORM\Column(nullable: true)]
-    private ?\DateTimeImmutable $updatedAt = null;
-
+        #[ORM\Column]
+        private ?\DateTimeImmutable $createdAt = null;
+        
+        #[ORM\OneToMany(mappedBy: 'author', targetEntity: AdressUser::class)]
+        private Collection $AdressUsers;
+        
+        #[ORM\Column(nullable: true)]
+        private ?\DateTimeImmutable $updatedAt = null;
+        
     #[ORM\Column(length: 10)]
     #[Assert\NotBlank(message: "Veuillez accepter les condition.")]
     private ?string $condition_user = null;
+
 
    
 
@@ -237,6 +242,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setConditionUser(?string $condition_user): static
     {
         $this->condition_user = $condition_user;
+
+        return $this;
+    }
+
+    public function getBirthDate(): ?\DateTimeInterface
+    {
+        return $this->birthdate;
+    }
+
+    public function setBirthDate(\DateTimeInterface $birthdate): static
+    {
+        $this->birthdate = $birthdate;
 
         return $this;
     }

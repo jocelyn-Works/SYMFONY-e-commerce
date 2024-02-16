@@ -54,10 +54,15 @@ class UserCrudController extends AbstractCrudController
             EmailField::new('email'),
             // ->setFormTypeOption('disabled', 'disabled') 
 
+            DateTimeField::new('birthdate')
+            ->setFormTypeOption('disabled', 'disabled') ,
+
             ArrayField::new('roles')
                 ->hideOnIndex(),
 
-            TextField::new('password'),
+            TextField::new('password')
+            ->hideOnIndex()
+            ->hideOnForm(),
 
             TextField::new('condition_user')
                 ->setFormTypeOption('data', 'ACCEPTED'),

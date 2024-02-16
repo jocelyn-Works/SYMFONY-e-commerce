@@ -1,0 +1,42 @@
+
+// button //
+.btn {
+    border-radius: $border-radius;
+    padding: 25px 30px;
+    border: none;
+    box-shadow: $box-shadow;
+    font-weight: 600;
+    font-size: large;
+    cursor: pointer;
+  
+    &.btn-primary {
+      background-color: $primary;
+      color: $white;
+      transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+      &:hover {
+        transition: opacity 0.4s;
+        border: 2px solid $primary;
+        background-color: $white;
+        color: $primary;
+      }
+    }
+
+    &.btn-secondary {
+        background-color: $white;
+        color: $primary;
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+
+    
+        &:hover {
+          transition: opacity 0.4s;
+          border: 2px solid $white;
+          background-color: $primary;
+          color: $white;
+        }
+      }
+
+  }
+
+
+  

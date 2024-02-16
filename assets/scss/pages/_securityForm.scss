@@ -1,0 +1,87 @@
+
+.form-content{
+    width: 100%;
+    @extend.flex-row;
+    
+
+    .form-coroussel{
+        width: 50%;
+    }
+
+    .security-form{
+        width: 50%;
+
+        form{
+            width: 100%;
+            @extend.flex-column;
+            padding: 15%;
+            // font-family: ;
+            .form-group-row{
+                width: 47%;
+
+            }
+            .custom_checkbox{
+                margin: 3vh 2vh ;
+
+                .condition{
+                    margin-left: 5px;
+                }
+                p{
+                    font-size: large;
+                    padding: 5px 70px 0 20px;
+                    a{
+                        text-decoration:underline;
+                    }
+                }
+
+            }
+            label {
+                display: block;
+                letter-spacing: 2px;
+                font-size: large;
+                font-weight: bold;
+                
+                margin-bottom: 10px;
+            }
+            input[type="text"],
+            input[type="email"],
+            input[type="password"],
+            input[type="selecte"],
+            input[type="date"], 
+            select{
+                width: 100%;
+                padding: 10px;
+                align-items: center;
+                border: 1.5px solid $gray-light;
+                border-radius: 5px;
+                font-size:large;
+                line-height: 1.5;
+                margin-bottom: 20px;
+
+          }
+          .custom_checkbox{
+            margin-bottom: 15px;
+          }
+          .btn {
+            border-radius: $border-radius;
+            padding: 10px 20px;
+            border: none;
+            box-shadow: $box-shadow;
+            cursor: pointer;
+          
+            &.btn-primary {
+              background-color: $primary;
+              color: $white;
+              font-weight: 600;
+          
+              &:hover {
+                transition: opacity 0.4s;
+                border: 2px solid $primary;
+                background-color: $white;
+                color: $primary;
+              }
+            }
+          }
+        }
+    }
+}
