@@ -9,14 +9,43 @@
   <div class="user-content">
     <div class="adress-content">
       <div class="add-new-adress">
-        <div class="go-back">
+        <div class="row-betwen">
+          <div class="hiden"></div>
+          <div class="user_name">
+             <h2> {{ app.user.fullname }}</h2>
+          </div>
+          <div class="go-back">
             <a href="{{path('user_adress')}}">
-                <img src="{{asset ('build/images/icons/circle-xmark-regular.svg')}}" alt="">
+              <img src="{{asset ('build/images/icons/circle-xmark-regular.svg')}}" alt="">
             </a>
+          </div>
         </div>
+        
         {{ form_start(form) }}
+        {{ form_label(form.adress) }}
+        {{ form_widget(form.adress) }}
+
+        <div class="row-betwen">
+          <div class="form-group-row">
+            {{ form_label(form.city) }}
+            {{ form_widget(form.city) }}
+          </div>
+          <div class="form-group-row">
+            {{ form_label(form.postalCode) }}
+            {{ form_widget(form.postalCode) }}
+          </div>
+      </div>
+
+        {{ form_label(form.country) }}
+        {{ form_widget(form.country) }}
+
+        {{ form_label(form.phone) }}
+        {{ form_widget(form.phone) }}
+
         {{ form_widget(form) }}
-        <button class="btn btn-primary">Ajouter</button>
+        <div class="button">
+          <button class="btn btn-primary">Ajouter</button>
+        </div>
         {{ form_end(form) }}
       </div>
     </div>

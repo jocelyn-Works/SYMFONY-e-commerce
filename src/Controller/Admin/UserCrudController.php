@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -18,6 +17,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
 class UserCrudController extends AbstractCrudController
 {
+    use Trait\ReadOnlyTrait;    
+    
 
     private EntityManagerInterface $entityManager;
 
@@ -36,7 +37,7 @@ class UserCrudController extends AbstractCrudController
         return $crud
             ->setEntityLabelInPlural('Utilisateurs') //  nom de la table a afficher
             ->setEntityLabelInSingular('Ajouter un Utilisateur') // crée un utilisateur 
-            ->setPageTitle("index", " E-commerce - Administration Utilisateurs") // titre page 
+            ->setPageTitle("index", "  Utilisateurs") // titre page 
             ->setPaginatorPageSize(10); // 10 utilisateurs
     }
 
@@ -45,16 +46,21 @@ class UserCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')
-                ->hideOnForm(),
+                ->hideOnForm()
+                ->hideOnIndex(),
 
-            TextField::new('firstname'),
+            TextField::new('firstname')
+            ->setLabel('Prénom'),
 
-            TextField::new('lastname'),
+            TextField::new('lastname')
+            ->setLabel('Nom'),
 
-            EmailField::new('email'),
+            EmailField::new('email')
+            ->setLabel('Adress Email'),
             // ->setFormTypeOption('disabled', 'disabled') 
 
             DateTimeField::new('birthdate')
+            ->setLabel('Anniversaire')
             ->setFormTypeOption('disabled', 'disabled') ,
 
             ArrayField::new('roles')
@@ -66,7 +72,6 @@ class UserCrudController extends AbstractCrudController
 
             TextField::new('condition_user')
                 ->setFormTypeOption('data', 'ACCEPTED'),
-
 
 
             DateTimeField::new('updatedAt'),

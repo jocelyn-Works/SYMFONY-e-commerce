@@ -2,10 +2,13 @@
 
 namespace App\Entity;
 
-use App\Repository\ProductRepository;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+
+
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\ProductRepository;
+use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Doctrine\Common\Collections\ArrayCollection;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
@@ -16,16 +19,19 @@ class Product
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "Veuillez renseigner un nom.")]
     private ?string $name = null;
 
     #[ORM\Column(length: 855)]
+    #[Assert\NotBlank(message: "Veuillez renseigner une description.")]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank(message: "Veuillez renseigner un prix.")]
     private ?int $price = null;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ImageProduct::class,
-    orphanRemoval: true, cascade:['persist'])]
+    orphanRemoval: true, cascade:['persist', 'remove'])]
     private Collection $images;
 
     #[ORM\Column]
@@ -34,12 +40,26 @@ class Product
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Category::class,
+    orphanRemoval: true, cascade:['persist', 'remove'])]
+    private Collection $categories;
+
+    
+
+    
+
+    
+
+    
+
+
 
     public function __construct()
     {
     
         $this->createdAt = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
+        $this->categories = new ArrayCollection();
         
     }
 
@@ -142,4 +162,37 @@ class Product
 
         return $this;
     }
+
+    /**
+     * @return Collection<int, Category>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(Category $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+            $category->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(Category $category): static
+    {
+        if ($this->categories->removeElement($category)) {
+            // set the owning side to null (unless already changed)
+            if ($category->getProduct() === $this) {
+                $category->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    
+   
 }

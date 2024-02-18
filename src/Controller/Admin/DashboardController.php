@@ -6,13 +6,14 @@ use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\AdressUser;
 use App\Entity\ImageProduct;
+use App\Entity\KindCategory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use App\Entity\SubCategory;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -54,5 +55,9 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class);
         yield MenuItem::linkToCrud('Produits', 'fas fa-shirt', Product::class);
         yield MenuItem::linkToCrud('Images Produits', 'fas fa-image', ImageProduct::class);
+        yield MenuItem::linkToCrud('categorie', 'fas fa-plus', KindCategory::class);
+        yield MenuItem::linkToCrud('Sous categorie', 'fas fa-plus', SubCategory::class);
+        
+
     }
 }

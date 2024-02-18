@@ -1,8 +1,8 @@
 footer {
-  width: 100%;
+  
   // visibility: hidden;
   bottom: 0;
-  width: 100%;
+ 
   padding: 2vh 2rem;
   background-color: $black;
   @extend.flex-column;
@@ -36,7 +36,7 @@ footer {
 
     .social {
       width: 12%;
-      @extend.row-betwen;
+      @extend.row-betwen-100;
       margin-right: 10rem;
       .svg-social{
         width: 30px;
