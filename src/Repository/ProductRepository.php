@@ -22,6 +22,15 @@ class ProductRepository extends ServiceEntityRepository
     }
 
 
+        public function findAllProduct()
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'i')
+            ->addSelect('i')
+            ->getQuery()
+            ->getResult();
+    }
+
      // Fonction de recherche par ID
      public function findProductWithImages($id)
     {
@@ -33,6 +42,8 @@ class ProductRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+   
 
  
 

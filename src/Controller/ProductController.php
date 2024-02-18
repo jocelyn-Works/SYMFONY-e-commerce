@@ -16,19 +16,18 @@ class ProductController extends AbstractController
         return $this->render('product/index.html.twig', []);
     }
 
-    #[Route('/hommes-chaussures', name: 'product_Men')]
+    #[Route('/chaussures_hommes', name: 'product_Men')]
     public function Men(
-        ProductRepository $productrepositoty,
-        ImageProductRepository $imageProductrepository
+        ProductRepository $productrepository,
     ): Response {
-        $product = $productrepositoty->findall();
-        $images = $imageProductrepository->findall();
+        $product = $productrepository->findAllProduct();
         return $this->render('product/hommes.html.twig', [
             'products' => $product,
-            'images' => $images
-
+            
         ]);
     }
+    // $images = $imageProductrepository->findall();
+    // 'images' => $images
 
     #[Route('/hommes-chaussures/{id}', name: 'product_show')]
     public function Productid(int $id, ProductRepository $productRepository): Response

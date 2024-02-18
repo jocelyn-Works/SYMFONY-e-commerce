@@ -83,7 +83,8 @@ header {
       top: 8vh;
       left: 84rem;
       background-color: $NAV-background-color;
-      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+      box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px,
+        rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
       border: 1px solid $primary;
       border-radius: 10px;
       z-index: 2;
@@ -126,7 +127,7 @@ header {
     &.active-tab {
       display: flex;
     }
-    
+
     .tab-contents {
       width: 60%;
       background-color: $NAV-background-color;
@@ -140,6 +141,12 @@ header {
 
         li {
           margin: 2vh 5rem;
+          p {
+            color: $gray;
+            &:hover{
+              color: $black;
+            }
+          }
         }
       }
     }
