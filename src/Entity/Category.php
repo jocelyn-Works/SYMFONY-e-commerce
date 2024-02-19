@@ -27,9 +27,9 @@ class Category
 
 
     public function __toString(): string
-{
-    return $this->getKindCategory()->getName() . ' -> ' . $this->getSubCategory()->getName();
-}
+    {
+        return $this->getKindCategory()->getName() . ' -> ' . $this->getSubCategory()->getName();
+    }
 
     public function getId(): ?int
     {

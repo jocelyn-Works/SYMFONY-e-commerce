@@ -44,6 +44,10 @@ class Product
     orphanRemoval: true, cascade:['persist', 'remove'])]
     private Collection $categories;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Stock::class,
+     orphanRemoval: true,  cascade:['persist', 'remove'])]
+    private Collection $stocks;
+
     
 
     
@@ -60,6 +64,7 @@ class Product
         $this->createdAt = new \DateTimeImmutable();
         $this->images = new ArrayCollection();
         $this->categories = new ArrayCollection();
+        $this->stocks = new ArrayCollection();
         
     }
 
@@ -187,6 +192,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($category->getProduct() === $this) {
                 $category->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Stock>
+     */
+    public function getStocks(): Collection
+    {
+        return $this->stocks;
+    }
+
+    public function addStock(Stock $stock): static
+    {
+        if (!$this->stocks->contains($stock)) {
+            $this->stocks->add($stock);
+            $stock->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removeStock(Stock $stock): static
+    {
+        if ($this->stocks->removeElement($stock)) {
+            // set the owning side to null (unless already changed)
+            if ($stock->getProduct() === $this) {
+                $stock->setProduct(null);
             }
         }
 

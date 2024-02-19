@@ -5,7 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use App\Form\CategoryType;
 use App\Form\ImageProductType;
-
+use App\Form\StockType;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -36,8 +36,6 @@ class ProductCrudController extends AbstractCrudController
             ->setPageTitle("index", "Produit") // titre page 
 
             ->setPaginatorPageSize(10); // 10 utilisateurs
-
-
     }
 
     public function configureFields(string $pageName): iterable
@@ -58,11 +56,13 @@ class ProductCrudController extends AbstractCrudController
                 ->setLabel('Prix'),
 
             CollectionField::new('categories')
-                ->setLabel('categorie')
+                ->setLabel('Categorie')
                 ->setEntryType(CategoryType::class),
 
+            
+
             CollectionField::new('images')
-                ->setLabel('image')
+                ->setLabel('Image')
                 ->hideOnIndex()
                 ->setEntryType(ImageProductType::class),
 
