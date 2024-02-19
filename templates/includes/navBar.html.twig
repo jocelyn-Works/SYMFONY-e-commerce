@@ -5,91 +5,163 @@
         <section class="menu" id="menu">
             <div class="menu-list">
                 <ul>
-                    <li><h3 class="tab-links" data-tabname="homme">Homme</h3></li>
-                    <li><h3 class="tab-links" data-tabname="femme">Femme</h3></li>
-                    <li><h3 class="tab-links" data-tabname="enfant">Enfant</h3></li>
-                    <li><h3 class="tab-links" data-tabname="autres">Autres</h3></li>
+                    <li>
+                        <h3 class="tab-links" data-tabname="homme">Homme</h3>
+                    </li>
+                    <li>
+                        <h3 class="tab-links" data-tabname="femme">Femme</h3>
+                    </li>
+                    <li>
+                        <h3 class="tab-links" data-tabname="enfant">Enfant</h3>
+                    </li>
+                    <li>
+                        <h3 class="tab-links" data-tabname="autres">Autres</h3>
+                    </li>
                 </ul>
-            </div>                        
+            </div>
         </section>
 
 
         <div class="user">
             <img id="userIcon" src="{{asset ('build/images/icons/user-icone.svg')}}" alt="Icone utilisateur">
-            
         </div>
         <div class="cart-shop">
             <img id="shoppingIcon" src="{{asset ('build/images/icons/shopping-bag.svg')}}" alt="Icone panier">
         </div>
-        <div class="user-menu">
-            <ul>
-                {% if is_granted('ROLE_USER') %}
-                <div class="user-granted">{{ app.user.fullname }}</div>
-                <li><a href="{{ path('user') }}">Votre compte</a></li>
-                <li><a href="{{ path('user_commande') }}">Mes commandes</a></li>
-                <li><a href="{{ path('logout') }}">Déconnexion</a></li>
-                {% if is_granted('ROLE_ADMIN') %}
-                <li><a href="{{path('admin')}}">Administration</a></li>
-                {% endif %}
-                {% else %}
-                <li><a href="{{ path('signup') }}">S'inscrire</a></li>
-                <li><a href="{{ path('login') }}">Se connecter</a></li>
-                {% endif %}
-            </ul>
-        </div>
+
     </nav>
 
     <div class="under-menu">
+
         <div class="tab-contents" id="homme">
             <ul>
+                <li>
+                    <h3><a href="{{path('product_Men')}}">Chausures</a></h3>
+                </li>
+                <li>
+                    <p><a href="{{path('product_Men')}}">Toutes les chaussures</a></p>
+                </li>
+                <li>
+                    <p><a href="{">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
 
-                    <li><h3><a href="{{path('product_Men')}}">Chausures</a></h3></li>
-                    <li><p><a href="{{path('product_Men')}}">Toutes les chaussures</a></p></li>
-                    <li><p><a href="{">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    
             </ul>
-            </div>
+        </div>
 
-            <div class="tab-contents" id="femme">
+        <div class="tab-contents" id="femme">
+            <ul>
+                <li>
+                    <h3><a href="">Chausures</a></h3>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-contents" id="enfant">
+            <ul>
+                <li>
+                    <h3><a href="">Chausures</a></h3>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="tab-contents" id="autres">
+            <ul>
+                <li>
+                    <h3><a href="">Chausures</a></h3>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+                <li>
+                    <p><a href="">Test</a></p>
+                </li>
+            </ul>
+        </div>
+
+        <div class="user-menu">
+            <div class="menu-1"></div>
+
+            <div class="menu-2">
                 <ul>
-                    <li><h3><a href="">Chausures</a></h3></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
+                    {% if is_granted('ROLE_USER') %}
+                    <div class="user-granted">{{ app.user.fullname }}</div>
+                    <li><a href="{{ path('user') }}"><img src="{{asset ('build/images/icons/user-solid.svg')}}" alt="Icone power-off" >Mon profil</a></li>
+                    <li><a href="{{ path('user_commande') }}"><img src="{{asset ('build/images/icons/cart-shopping-solid.svg')}}" alt="Icone power-off" >Mes commandes</a></li>
+                    <li><a href="{{ path('logout') }}"><img src="{{asset ('build/images/icons/power-off-solid.svg')}}" alt="Icone power-off" >Déconnexion</a></li>
+                    {% if is_granted('ROLE_ADMIN') %}
+                    <li><a href="{{path('admin')}}"><img src="{{asset ('build/images/icons/lock-solid.svg')}}" alt="Icone power-off" >Administration</a></li>
+                    {% endif %}
+                    {% else %}
+                    <li><a href="{{ path('signup') }}">S'inscrire</a></li>
+                    <li><a href="{{ path('login') }}">Se connecter</a></li>
+                    {% endif %}
                 </ul>
             </div>
+        </div>
 
-            <div class="tab-contents" id="enfant">
-                <ul>
-                    <li><h3><a href="">Chausures</a></h3></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li> 
-                </ul>
-            </div>
-
-            <div class="tab-contents" id="autres">
-                <ul>
-                    <li><h3><a href="">Chausures</a></h3></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                    <li><p><a href="">Test</a></p></li>
-                </ul>
-            </div>
     </div>
-    
+
 </header>
