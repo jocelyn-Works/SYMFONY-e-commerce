@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\UserType;
 use DateTimeImmutable;
 use App\Entity\AdressUser;
 use App\Form\AdressUserType;
@@ -26,11 +27,27 @@ class UserController extends AbstractController
 
     #[Route('/user', name: 'user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function user(): Response
+    public function user(Request $request,
+    EntityManagerInterface $em): Response
     {
+        /**
+         * @var User
+         */
+        $user =$this->getUser();
 
+        $userForm =$this->createForm(UserType::class, $user);
+        $userForm->remove('password')
+                 ->remove('condition_user');
 
-        return $this->render('user/index.html.twig', []);
+        $userForm->handleRequest($request);
+        if($userForm->isSubmitted() && $userForm->isValid()){
+
+            $em->flush();
+        }
+
+        return $this->render('user/index.html.twig', [
+            'form' => $userForm->createView()
+        ]);
     }
 
 

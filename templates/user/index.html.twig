@@ -5,8 +5,31 @@
 <div class="user-body">
   {% include "includes/userMenu.html.twig" %}
 
-
-  <div class="user-content">
-   
+  <div class="user-form-content">
+    <h2> {{ app.user.fullname }}</h2>
+    <div class="flex-row">
+      <div class="user-form">
+        {{ form_start(form) }}
+        {{ form_label(form.email) }}
+        {{ form_widget(form.email) }}
+        <div class="row-betwen">
+          <div class="form-group-row">
+            {{ form_label(form.firstname) }}
+            {{ form_widget(form.firstname) }}
+          </div>
+          <div class="form-group-row">
+            {{ form_label(form.lastname) }}
+            {{ form_widget(form.lastname) }}
+          </div>
+        </div>
+        {{ form_label(form.birthdate) }}
+        {{ form_widget(form.birthdate) }}
+        <div class="button">
+          <button class="btn btn-primary">Modifier</button>
+        </div>
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}
