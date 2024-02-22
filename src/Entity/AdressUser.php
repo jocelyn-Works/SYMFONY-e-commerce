@@ -63,6 +63,12 @@ class AdressUser
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
+
+    public function __toString(): string
+    {
+        return $this->getAuthor(); 
+    }
+
         
     public function __construct()
     {

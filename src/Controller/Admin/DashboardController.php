@@ -52,19 +52,26 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         // yield MenuItem::section('Blog');
-        yield MenuItem::linkToUrl('Home', 'fa fa-cart-shopping', 'https://127.0.0.1:8000/');
+        yield MenuItem::linkToRoute( 'Retour au Site', 'fa fa-undo', 'home');
+
         yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class);
-        yield MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class);
-        yield MenuItem::linkToCrud('Produits', 'fas fa-shirt', Product::class);
-        yield MenuItem::linkToCrud('Images Produits', 'fas fa-image', ImageProduct::class);
-        yield MenuItem::linkToCrud('Stock Produits', 'fas fa-note-sticky', Stock::class);
-        yield MenuItem::linkToCrud('categorie', 'fas fa-plus', KindCategory::class);
-        yield MenuItem::linkToCrud('Sous categorie', 'fas fa-plus', SubCategory::class);
-        yield MenuItem::linkToCrud('Taille', 'fas fa-plus', Size::class);
-        yield MenuItem::linkToCrud('Genre', 'fas fa-plus', Gender::class);
 
-        
+        yield MenuItem::subMenu( 'Utilisateurs', icon: 'fas fa-users',)->setSubItems([
+            MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),
+            MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class),
 
+        ]);
+
+
+        yield MenuItem::subMenu('Produits', 'fas fa-gear',)->setSubItems([
+            MenuItem::linkToCrud('Produits', 'fas fa-shirt', Product::class),
+            MenuItem::linkToCrud('Images Produits', 'fas fa-image', ImageProduct::class),
+            MenuItem::linkToCrud('Stock Produits', 'fas fa-note-sticky', Stock::class),
+            MenuItem::linkToCrud('categorie', 'fas fa-plus', KindCategory::class),
+            MenuItem::linkToCrud('Sous categorie', 'fas fa-plus', SubCategory::class),
+            MenuItem::linkToCrud('Taille', 'fab fa-delicious', Size::class),
+            MenuItem::linkToCrud('Genre', 'fas fa-venus-mars', Gender::class),
+
+        ]);
     }
 }

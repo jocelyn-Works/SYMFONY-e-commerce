@@ -14,11 +14,12 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 
 class UserCrudController extends AbstractCrudController
 {
-    use Trait\ReadOnlyTrait;    
-    
+    use Trait\ReadOnlyTrait;
+
 
     private EntityManagerInterface $entityManager;
 
@@ -50,42 +51,52 @@ class UserCrudController extends AbstractCrudController
                 ->hideOnIndex(),
 
             TextField::new('firstname')
-            ->setLabel('Prénom'),
+                ->setLabel('Prénom'),
 
             TextField::new('lastname')
-            ->setLabel('Nom'),
+                ->setLabel('Nom'),
 
             EmailField::new('email')
-            ->setLabel('Adress Email'),
+                ->setLabel('Adress Email'),
             // ->setFormTypeOption('disabled', 'disabled') 
 
             DateTimeField::new('birthdate')
-            ->setLabel('Anniversaire')
-            ->setFormTypeOption('disabled', 'disabled') ,
+                ->setLabel('Anniversaire')
+                ->setFormTypeOption('disabled', 'disabled'),
 
             ArrayField::new('roles')
                 ->hideOnIndex(),
 
             TextField::new('password')
-            ->hideOnIndex()
+                ->hideOnIndex()
+                ->hideOnForm(),
+
+            IntegerField::new('condition_user')
+            ->hideOnForm()
+            ->hideOnIndex(),
+
+
+            DateTimeField::new('updatedAt')
             ->hideOnForm(),
-
-            TextField::new('condition_user')
-                ->setFormTypeOption('data', 'ACCEPTED'),
-
-
-            DateTimeField::new('updatedAt'),
-            // ->setFormTypeOption('disabled', 'disabled'),
 
             AssociationField::new('AdressUsers')
                 ->setLabel('Adress Utilisateurs')
-                ->hideOnForm(),
+                ->hideOnForm()
+                ->formatValue(function ($value, $entity) {
+                    // Supposons que la relation AdressUsers est de type many-to-one
+                    $firstAddressUser = $entity->getAdressUsers()->first();
+
+                    if ($firstAddressUser !== false && $firstAddressUser !== null) {
+                        return $firstAddressUser->getAuthor();
+                    }
+
+                    return null;
+                }),
+
 
         ];
-
-
     }
-        public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
+    public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         // Appelé avant la mise à jour de l'entité dans la base de données
         if ($entityInstance instanceof User) {
@@ -94,5 +105,4 @@ class UserCrudController extends AbstractCrudController
             $this->entityManager->flush();
         }
     }
-
 }

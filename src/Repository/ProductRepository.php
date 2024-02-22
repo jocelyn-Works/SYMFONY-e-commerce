@@ -31,6 +31,21 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function findProductCategory($category)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'i')
+            ->addSelect('i')
+            ->leftJoin('p.categories', 'c')
+            ->addSelect('c')
+            ->leftJoin('c.kindCategory', 'k')
+            ->addSelect('k')
+            ->andWhere('k.name = :category')
+            ->setParameter('category', $category)
+            ->getQuery()
+            ->getResult();
+    }
+
      // Fonction de recherche par ID
      public function findProductWithImages($id)
     {
