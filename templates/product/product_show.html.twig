@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-{% block title %}Hello ProductController!{%
+{% block title %}{{ product.name }}{%
 endblock %}
 
 {% block body %}
@@ -25,7 +25,11 @@ endblock %}
   <div class="show-description">
     <ul>
       <li><h1>{{ product.name }}</h1></li>
-      <li><p>{{ (product.price / 100) | number_format(2, '.', ',') }} €</p></li>
+      <li><h3>{{ category}}  </h3></li>
+      <li><p>{{ (product.price / 100) | number_format(2, ', ' ) }} €</p></li>
+      <div class="product-size">
+        
+      </div>
       <div class="description-product">
         <li><p>{{ product.description }}</p></li>
       </div>

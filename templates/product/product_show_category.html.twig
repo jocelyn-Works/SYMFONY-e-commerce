@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}{{ product.name }}{%
+endblock %}
+
+{% block body %}
+<div class="product-show" id="product-show">
+  <div class="content-image">
+    <div class="additional-images">
+      {% for image in product.images %}
+      <div class="images-box additional-image">
+        <img src="{{ asset('uploads/products/' ~ image.name) }}" />
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="carousel-image">
+      {% if product.images|length > 0 %}
+      <div class="first-image">
+        <img src="{{ asset('uploads/products/' ~ product.images[0].name) }}" />
+      </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="show-description">
+    <ul>
+      <li>
+        <h2>{{ product.name }}</h2>
+      </li>
+      <li>
+        <h3> {{ category}} </h3>
+      </li>
+      <li>
+        <p>{{ (product.price / 100) | number_format(2, ', ' ) }} €</p>
+      </li>
+      <div class="product-size">
+        <h3>Sélectionner la taille</h3>
+        <div class="size-choice">
+          
+        </div>
+
+      </div>
+      <div class="description-product">
+        <li>
+          <p>{{ product.description }}</p>
+        </li>
+      </div>
+    </ul>
+  </div>
+</div>
+
+{% endblock %}

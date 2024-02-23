@@ -36,19 +36,15 @@
         <div class="tab-contents" id="homme">
             <ul>
                 <li>
-                    <h3><a href="{{path('product_category')}}">Chausures</a></h3>
+                    <h3>Chausures</h3>
                 </li>
                 <li>
-                    <p><a href="{{path('product_category')}}">Toutes les chaussures</a></p>
+                    <p><a href="{{path('product_category', {'category': 'chaussure'})}}">Toutes les chaussures</a></p>
                 </li>
                 <li>
-                    <p><a href="{">Test</a></p>
-                </li>
-                <li>
-                    <p><a href="">Test</a></p>
-                </li>
-                <li>
-                    <p><a href="">Test</a></p>
+                    <p><a
+                            href="{{path('category_subCategory', {'category': 'chaussure','subCategory': 'air_jordan' })}}">Air
+                            jordan</a></p>
                 </li>
                 <li>
                     <p><a href="">Test</a></p>
@@ -56,10 +52,14 @@
                 <li>
                     <p><a href="">Test</a></p>
                 </li>
+            </ul>
+            <ul>
                 <li>
-                    <p><a href="">Test</a></p>
+                    <h3>Casquette</h3>
                 </li>
-
+                <li>
+                    <p><a href="{{path('product_category', {'category': 'casquette'})}}">Toutes les Casquette</a></p>
+                </li>
             </ul>
         </div>
 
@@ -140,7 +140,7 @@
                 </li>
             </ul>
         </div>
-
+        {# menu utilisateur #}
         <div class="user-menu">
             <div class="menu-1"></div>
 
@@ -148,11 +148,16 @@
                 <ul>
                     {% if is_granted('ROLE_USER') %}
                     <div class="user-granted">{{ app.user.fullname }}</div>
-                    <li><a href="{{ path('user') }}"><img src="{{asset ('build/images/icons/user-solid.svg')}}" alt="Icone power-off" >Mon profil</a></li>
-                    <li><a href="{{ path('user_commande') }}"><img src="{{asset ('build/images/icons/cart-shopping-solid.svg')}}" alt="Icone power-off" >Mes commandes</a></li>
-                    <li><a href="{{ path('logout') }}"><img src="{{asset ('build/images/icons/power-off-solid.svg')}}" alt="Icone power-off" >Déconnexion</a></li>
+                    <li><a href="{{ path('user') }}"><img src="{{asset ('build/images/icons/user-solid.svg')}}"
+                                alt="Icone power-off">Mon profil</a></li>
+                    <li><a href="{{ path('user_commande') }}"><img
+                                src="{{asset ('build/images/icons/cart-shopping-solid.svg')}}" alt="Icone power-off">Mes
+                            commandes</a></li>
+                    <li><a href="{{ path('logout') }}"><img src="{{asset ('build/images/icons/power-off-solid.svg')}}"
+                                alt="Icone power-off">Déconnexion</a></li>
                     {% if is_granted('ROLE_ADMIN') %}
-                    <li><a href="{{path('admin')}}"><img src="{{asset ('build/images/icons/lock-solid.svg')}}" alt="Icone power-off" >Administration</a></li>
+                    <li><a href="{{path('admin')}}"><img src="{{asset ('build/images/icons/lock-solid.svg')}}"
+                                alt="Icone power-off">Administration</a></li>
                     {% endif %}
                     {% else %}
                     <li><a href="{{ path('signup') }}">S'inscrire</a></li>
@@ -160,6 +165,13 @@
                     {% endif %}
                 </ul>
             </div>
+        </div>
+        {# menu panier #}
+        <div class="cart_menu">
+            <div class="menu_shoppin">
+
+            </div>
+
         </div>
 
     </div>

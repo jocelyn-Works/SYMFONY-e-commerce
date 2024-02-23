@@ -181,7 +181,7 @@ class UserController extends AbstractController
 
 
     // changer le mot de passe
-    #[Route('/user/change-password', name: 'changePassword')]
+    #[Route('/user/change_password', name: 'changePassword')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function changePassword(
         Request $request,

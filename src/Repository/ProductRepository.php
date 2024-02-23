@@ -36,26 +36,77 @@ class ProductRepository extends ServiceEntityRepository
         return $this->createQueryBuilder('p')
             ->leftJoin('p.images', 'i')
             ->addSelect('i')
-            ->leftJoin('p.categories', 'c')
-            ->addSelect('c')
+            ->leftJoin('p.categories', 'c') // Assurez-vous que la relation dans Product est bien "categories"
             ->leftJoin('c.kindCategory', 'k')
-            ->addSelect('k')
-            ->andWhere('k.name = :category')
+            ->andWhere('k.name = :category') // Assurez-vous que le champ est correct, utilisez "nom" d'après votre exemple
             ->setParameter('category', $category)
             ->getQuery()
             ->getResult();
     }
 
-     // Fonction de recherche par ID
-     public function findProductWithImages($id)
+    public function findProductCategory_subCategory($category, $subCategory)
     {
         return $this->createQueryBuilder('p')
             ->leftJoin('p.images', 'i')
             ->addSelect('i')
+            ->leftJoin('p.categories', 'c') // Assurez-vous que la relation dans Product est bien "categories"
+            ->leftJoin('c.kindCategory', 'k')
+            ->andWhere('k.name = :category') // Assurez-vous que le champ est correct, utilisez "nom" d'après votre exemple
+            ->setParameter('category', $category)
+            ->leftJoin('c.subCategory', 's')
+            ->andWhere('s.name = :subCategory')
+            ->setParameter('subCategory', $subCategory)
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findSubCategoriesForCategory()
+    {
+        return $this->createQueryBuilder('p')
+        ->leftJoin('p.categories', 'c')
+        ->leftJoin('c.subCategory', 's')
+        ->select('s.name as subCategory')
+        ->distinct()
+        ->getQuery()
+        ->getResult();
+    }
+
+    public function findProductWithId($id, $category)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'i')
+            ->addSelect('i')
+            ->leftJoin('p.categories', 'c') // Assurez-vous que la relation dans Product est bien "categories"
+            ->leftJoin('c.kindCategory', 'k')
+            ->andWhere('k.name = :category') // Assurez-vous que le champ est correct, utilisez "nom" d'après votre exemple
+            ->setParameter('category', $category)
             ->andWhere('p.id = :id')
             ->setParameter('id', $id)
             ->getQuery()
             ->getOneOrNullResult();
+
+            
+    }
+  
+
+    public function findProductWithIdCategory($id, $category, $subCategory)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'i')
+            ->addSelect('i')
+            ->leftJoin('p.categories', 'c') // Assurez-vous que la relation dans Product est bien "categories"
+            ->leftJoin('c.kindCategory', 'k')
+            ->andWhere('k.name = :category') // Assurez-vous que le champ est correct, utilisez "nom" d'après votre exemple
+            ->setParameter('category', $category)
+            ->leftJoin('c.subCategory', 's')
+            ->andWhere('s.name = :subCategory')
+            ->setParameter('subCategory', $subCategory)
+            ->andWhere('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+
+            
     }
 
    

@@ -1,8 +1,8 @@
 {% extends 'base.html.twig' %}
-{% block title %}{{ category | capitalize }}s ({{ totalProducts }}){%endblock %}
+{% block title %}{{ category | capitalize }}s {{ subCategory | capitalize | replace({'_': ' '})}} ({{ totalProducts }}){%endblock %}
 {% block body %}
 <div class="product-header">
-    <h2>{{ category | capitalize }}s ({{ totalProducts }})</h2>
+    <h2>{{ category | capitalize }}s {{ subCategory | capitalize | replace({'_': ' '})}} ({{ totalProducts }})</h2>
 </div>
 <div class="product-content">
     <div class="product-menu">
@@ -13,9 +13,7 @@
         {% for product in products %}
         <div class="cart">
             <a
-                href="{{ path('product_show', {'id': product.id, 'category': category }) }}">
-
-
+                href="{{path('product_show_category', {id: product.id, 'category': category, 'subCategory': subCategory})}}">
                 <div class="product-img">
                     {% for loopIndex, image in product.images %}
                     <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex> 0 %}style="display:
@@ -30,7 +28,6 @@
 
                 </div>
             </a>
-
         </div>
         {% endfor %}
     </div>

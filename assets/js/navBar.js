@@ -1,25 +1,4 @@
 
-
-// scroll nav bar 
-
-// let prevScrollPos = window.pageYOffset;
-// const navbar = document.getElementById('navbar');
-
-// window.onscroll = function() {
-//     let currentScrollPos = window.pageYOffset;
-
-//     if (prevScrollPos > currentScrollPos) {
-//         // L'utilisateur fait défiler vers le haut
-//         navbar.style.top = "0";
-//     } else {
-//         // L'utilisateur fait défiler vers le bas
-//         navbar.style.top = `-${navbar.offsetHeight}px`; // masquer la barre de navigation
-//     }
-
-//     prevScrollPos = currentScrollPos;
-// }
-
-
 // user menu 
 
 (function () {
@@ -46,6 +25,36 @@
         }
     });
 })();
+
+
+// shopping  menu 
+
+(function () {
+    const shoppingIcon = document.getElementById('shoppingIcon');
+    const cart_menu = document.querySelector('.cart_menu');
+    const VISIBLE = 'visible';
+    const HIDDEN = 'hidden';
+
+    // Fonction pour basculer la visibilité
+    function toggleVisibility() {
+        cart_menu.style.visibility = (cart_menu.style.visibility === VISIBLE) ? HIDDEN : VISIBLE;
+    }
+
+    // Afficher ou masquer userMenu au clic sur userIcon
+    shoppingIcon.addEventListener('click', toggleVisibility);
+
+    // Masquer userMenu au clic en dehors
+    document.addEventListener('click', (event) => {
+        const isClickedInsideUserMenu = cart_menu.contains(event.target);
+        const isClickedOnUserIcon = event.target === shoppingIcon || shoppingIcon.contains(event.target); // Vérifie si le clic est dans ou sur userIcon
+
+        if (!isClickedInsideUserMenu && !isClickedOnUserIcon) {
+            cart_menu.style.visibility = HIDDEN;
+        }
+    });
+})();
+
+
 
 
 // sous menu 
