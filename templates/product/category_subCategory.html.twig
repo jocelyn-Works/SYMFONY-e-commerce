@@ -12,8 +12,7 @@
     <div class="product-cart">
         {% for product in products %}
         <div class="cart">
-            <a
-                href="{{path('product_show_category', {id: product.id, 'category': category, 'subCategory': subCategory})}}">
+            <a href="{{path('product_show_category', {id: product.id,'productName': product.name, 'category': category, 'subCategory': subCategory, 'gender': gender})}}">
                 <div class="product-img">
                     {% for loopIndex, image in product.images %}
                     <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex> 0 %}style="display:

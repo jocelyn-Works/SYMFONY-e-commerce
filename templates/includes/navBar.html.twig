@@ -39,11 +39,11 @@
                     <h3>Chausures</h3>
                 </li>
                 <li>
-                    <p><a href="{{path('product_category', {'category': 'chaussure'})}}">Toutes les chaussures</a></p>
+                    <p><a href="{{path('product_category', {'category': 'chaussure', 'gender': 'homme'})}}">Toutes les chaussures</a></p>
                 </li>
                 <li>
                     <p><a
-                            href="{{path('category_subCategory', {'category': 'chaussure','subCategory': 'air_jordan' })}}">Air
+                            href="{{path('category_subCategory', {'gender': 'homme', 'category': 'chaussure','subCategory': 'air_jordan' })}}">Air
                             jordan</a></p>
                 </li>
                 <li>
@@ -58,7 +58,7 @@
                     <h3>Casquette</h3>
                 </li>
                 <li>
-                    <p><a href="{{path('product_category', {'category': 'casquette'})}}">Toutes les Casquette</a></p>
+                    <p><a href="{{path('product_category', {'category': 'casquette', 'gender': 'homme'})}}">Toutes les Casquette</a></p>
                 </li>
             </ul>
         </div>

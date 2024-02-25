@@ -11,65 +11,86 @@ use Twig\Environment;
 class ProductController extends AbstractController
 {
     #[Route('/product', name: 'product')]
-    public function index(Environment $environement): Response
+    public function index(): Response
     {
         return $this->render('product/index.html.twig', []);
     }
 
-    #[Route('/h/{category}', name: 'product_category')]
+    #[Route('/{gender}/{category}', name: 'product_category')]
     public function Category(
         $category,
-        ProductRepository $productrepository,
+        $gender,
+        ProductRepository $productRepository,
     ): Response {
 
-        $product = $productrepository->findProductCategory($category);
+        $product = $productRepository->findProductCategory($category);
+
+        $stock = $productRepository->findProductStock($gender);
 
         $totalProducts = count($product);
 
         return $this->render('product/category.html.twig', [
             'products' => $product,
             'category' => $category,
+            'gender' => $gender,
+            'stocks' => $stock,
             'totalProducts' => $totalProducts,
 
 
         ]);
     }
 
-    #[Route('/h/{category}/{id}', name: 'product_show')]
+    #[Route('/{gender}/{category}/{productName}/{id}', name: 'product_show')]
     public function ProductShow(
         int $id,
+        $productName,
         $category,
+        $gender,
         ProductRepository $productRepository
     ): Response {
+
         $product = $productRepository->findProductWithId($id, $category);
+
+        // dd($product);
 
         if (!$product) {
             throw $this->createNotFoundException('Product not found');
         }
 
-        
+        $stock = $productRepository->findProductStockId($productName, $gender);
 
+
+        // dd($stock);
         return $this->render('product/product_show.html.twig', [
             'product' => $product,
+            'productName' => $productName,
             'category' => $category,
+            'gender' => $gender,
+            'stocks' => $stock
         ]);
     }
 
 
-    #[Route('/hh/{category}/{subCategory}', name: 'category_subCategory')]
+    #[Route('/{gender}/{category}/{subCategory}', name: 'category_subCategory')]
     public function subCategory(
         $category,
         $subCategory,
-        ProductRepository $productrepository,
+        $gender,
+        ProductRepository $productRepository,
     ): Response {
-        $product = $productrepository->findProductCategory_subCategory($category, $subCategory);
+        $product = $productRepository->findProductCategory_subCategory($category, $subCategory);
         // dd($product,$category, $subCategory);
+
+        $stock = $productRepository->findProductStock($gender);
+
         $totalProducts = count($product);
 
         return $this->render('product/category_subCategory.html.twig', [
             'products' => $product,
             'category' => $category,
             'subCategory' => $subCategory,
+            'stocks' => $stock,
+            'gender' => $gender,
             'totalProducts' => $totalProducts,
 
         ]);
@@ -78,23 +99,31 @@ class ProductController extends AbstractController
 
 
 
-    #[Route('/hh/{category}/{subCategory}/{id}', name: 'product_show_category')]
+    #[Route('/{gender}/{category}/{subCategory}/{productName}/{id}', name: 'product_show_category')]
     public function ProductShowCategory(
         int $id,
+        $productName,
         $category,
         $subCategory,
+        $gender,
         ProductRepository $productRepository
     ): Response {
+
         $product = $productRepository->findProductWithIdCategory($id, $category, $subCategory);
 
         if (!$product) {
             throw $this->createNotFoundException('Product not found');
         }
 
+        $stock = $productRepository->findProductStockId($productName, $gender);
+
         return $this->render('product/product_show_category.html.twig', [
             'product' => $product,
+            'productName' => $productName,
             'category' => $category,
             'subCategory' => $subCategory,
+            'gender' => $gender,
+            'stocks' => $stock
         ]);
     }
 }

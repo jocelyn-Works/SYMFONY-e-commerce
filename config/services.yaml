@@ -25,6 +25,7 @@ services:
   App\Controller\SecurityController:
     arguments:
       $formLoginAuthenticator: "@security.authenticator.form_login.main"
+      
 
   # App\Service\PictureService:
   #     arguments:

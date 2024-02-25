@@ -28,18 +28,30 @@ endblock %}
         <h2>{{ product.name }}</h2>
       </li>
       <li>
-        <h3> {{ category}} </h3>
+        <h3> {{ category}} pour {{gender}}</h3>
       </li>
       <li>
         <p>{{ (product.price / 100) | number_format(2, ', ' ) }} €</p>
       </li>
+
       <div class="product-size">
         <h3>Sélectionner la taille</h3>
-        <div class="size-choice">
-          
-        </div>
+        <div class="size-content">
+          {% set sizeNames = [] %}
+          {% for stock in product.stocks %}
+          {% set sizeNames = sizeNames|merge([stock.size.name]) %}
+          {% endfor %}
 
+          {% set sortedSizeNames = sizeNames|sort %}
+
+          {% for sizeName in sortedSizeNames %}
+          <div class="size-choice">
+            {{ sizeName }}
+          </div>
+          {% endfor %}
+        </div>
       </div>
+
       <div class="description-product">
         <li>
           <p>{{ product.description }}</p>

@@ -7,31 +7,55 @@ endblock %}
   <div class="content-image">
     <div class="additional-images">
       {% for image in product.images %}
-        <div class="images-box additional-image">
-          <img src="{{ asset('uploads/products/' ~ image.name) }}" />
-        </div>
+      <div class="images-box additional-image">
+        <img src="{{ asset('uploads/products/' ~ image.name) }}" />
+      </div>
       {% endfor %}
     </div>
-    
+
     <div class="carousel-image">
       {% if product.images|length > 0 %}
-        <div class="first-image">
-          <img src="{{ asset('uploads/products/' ~ product.images[0].name) }}" />
-        </div>
+      <div class="first-image">
+        <img src="{{ asset('uploads/products/' ~ product.images[0].name) }}" />
+      </div>
       {% endif %}
     </div>
   </div>
 
   <div class="show-description">
     <ul>
-      <li><h1>{{ product.name }}</h1></li>
-      <li><h3>{{ category}}  </h3></li>
-      <li><p>{{ (product.price / 100) | number_format(2, ', ' ) }} €</p></li>
+      <li>
+        <h1>{{ product.name }}</h1>
+      </li>
+      <li>
+        <h3>{{ category}} pour {{gender}} </h3>
+      </li>
+      <li>
+        <p>{{ (product.price / 100) | number_format(2, ', ' ) }} €</p>
+      </li>
+
       <div class="product-size">
-        
+        <h3>Sélectionner la taille</h3>
+        <div class="size-content">
+          {% set sizeNames = [] %}
+          {% for stock in product.stocks %}
+          {% set sizeNames = sizeNames|merge([stock.size.name]) %}
+          {% endfor %}
+
+          {% set sortedSizeNames = sizeNames|sort %}
+
+          {% for sizeName in sortedSizeNames %}
+          <div class="size-choice">
+            {{ sizeName }}
+          </div>
+          {% endfor %}
+        </div>
       </div>
+
       <div class="description-product">
-        <li><p>{{ product.description }}</p></li>
+        <li>
+          <p>{{ product.description }}</p>
+        </li>
       </div>
     </ul>
   </div>
