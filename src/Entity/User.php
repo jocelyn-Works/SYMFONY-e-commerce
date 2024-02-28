@@ -65,6 +65,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         #[Assert\NotBlank(message: "Veuillez accepter les condition.")]
         private ?bool $condition_user = null;
 
+        #[ORM\OneToMany(mappedBy: 'user', targetEntity: Like::class, orphanRemoval: true)]
+        private Collection $likes;
+
 
    
 
@@ -78,6 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->roles = ['ROLE_USER'];
         $this->createdAt = new \DateTimeImmutable();
         $this->AdressUsers = new ArrayCollection();
+        $this->likes = new ArrayCollection();
     }
 
     
@@ -254,6 +258,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthDate(\DateTimeInterface $birthdate): static
     {
         $this->birthdate = $birthdate;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Like>
+     */
+    public function getLikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addLike(Like $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getUser() === $this) {
+                $like->setUser(null);
+            }
+        }
 
         return $this;
     }

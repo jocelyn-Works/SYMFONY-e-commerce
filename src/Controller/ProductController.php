@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Product;
+use App\Repository\LikeRepository;
 use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -45,7 +47,9 @@ class ProductController extends AbstractController
         $productName,
         $category,
         $gender,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        LikeRepository $likeRepository,
+        Product $productLike
     ): Response {
 
         $product = $productRepository->findProductWithId($id, $category);
@@ -58,6 +62,11 @@ class ProductController extends AbstractController
 
         $stock = $productRepository->findProductStockId($productName, $gender);
 
+        $isProductLiked = $likeRepository->findOneBy([
+            'product' =>$productLike,
+            'user' => $this->getUser()
+        ]) !== null;
+
 
         // dd($stock);
         return $this->render('product/product_show.html.twig', [
@@ -65,7 +74,8 @@ class ProductController extends AbstractController
             'productName' => $productName,
             'category' => $category,
             'gender' => $gender,
-            'stocks' => $stock
+            'stocks' => $stock,
+            'isProductLiked' => $isProductLiked
         ]);
     }
 
@@ -105,7 +115,9 @@ class ProductController extends AbstractController
         $category,
         $subCategory,
         $gender,
-        ProductRepository $productRepository
+        ProductRepository $productRepository,
+        LikeRepository $likeRepository,
+        Product $productLike
     ): Response {
 
         $product = $productRepository->findProductWithIdCategory($id, $category, $subCategory);
@@ -115,6 +127,11 @@ class ProductController extends AbstractController
         }
 
         $stock = $productRepository->findProductStockId($productName, $gender);
+        
+        $isProductLiked = $likeRepository->findOneBy([
+            'product' => $productLike,
+            'user' => $this->getUser()
+        ]) !== null;
 
         return $this->render('product/product_show_category.html.twig', [
             'product' => $product,
@@ -122,7 +139,8 @@ class ProductController extends AbstractController
             'category' => $category,
             'subCategory' => $subCategory,
             'gender' => $gender,
-            'stocks' => $stock
+            'stocks' => $stock,
+            'isProductLiked' => $isProductLiked
         ]);
     }
 }
