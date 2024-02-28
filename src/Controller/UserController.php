@@ -27,20 +27,21 @@ class UserController extends AbstractController
 
     #[Route('/user', name: 'user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
-    public function user(Request $request,
-    EntityManagerInterface $em): Response
-    {
+    public function user(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
         /**
          * @var User
          */
-        $user =$this->getUser();
+        $user = $this->getUser();
 
-        $userForm =$this->createForm(UserType::class, $user);
+        $userForm = $this->createForm(UserType::class, $user);
         $userForm->remove('password')
-                 ->remove('condition_user');
+            ->remove('condition_user');
 
         $userForm->handleRequest($request);
-        if($userForm->isSubmitted() && $userForm->isValid()){
+        if ($userForm->isSubmitted() && $userForm->isValid()) {
 
             $em->flush();
         }
@@ -51,7 +52,7 @@ class UserController extends AbstractController
     }
 
 
-    #[Route('/user/adress', name: 'user_adress')]
+    #[Route('/adress', name: 'user_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_adress(
         AdressUserRepository $AdressUserRepository,
@@ -66,7 +67,7 @@ class UserController extends AbstractController
     }
 
     // ajouter une adress
-    #[Route('/user/add_adress', name: 'user_add_adress')]
+    #[Route('/add_adress', name: 'user_add_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function add_user_adress(
         Request $request,
@@ -103,7 +104,7 @@ class UserController extends AbstractController
     }
 
     // suprimer une adress
-    #[Route('/user/remove_adress/{id}', name: 'remove_adress')]
+    #[Route('/remove_adress/{id}', name: 'remove_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function removeFriend(
         int $id,
@@ -128,7 +129,7 @@ class UserController extends AbstractController
     }
 
     // modifier une adress
-    #[Route('/user/edit_adress/{id}', name: 'edit_adress')]
+    #[Route('/edit_adress/{id}', name: 'edit_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function editDescription(
         int $id,
@@ -168,7 +169,7 @@ class UserController extends AbstractController
 
 
 
-    #[Route('/user/commande', name: 'user_commande')]
+    #[Route('/commande', name: 'user_commande')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_commande(): Response
     {
@@ -181,7 +182,7 @@ class UserController extends AbstractController
 
 
     // changer le mot de passe
-    #[Route('/user/change_password', name: 'changePassword')]
+    #[Route('/change_password', name: 'changePassword')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function changePassword(
         Request $request,
@@ -213,6 +214,7 @@ class UserController extends AbstractController
 
         $passwordForm->handleRequest($request);
         if ($passwordForm->isSubmitted() && $passwordForm->isValid()) {
+
             $newPassword = $passwordForm->get('newPassword')->getData();
 
             if ($newPassword) {
@@ -227,9 +229,6 @@ class UserController extends AbstractController
         }
         return $this->render('user/changePassword.html.twig', [
             'form' => $passwordForm->createView(),
-
-
-
         ]);
     }
 }

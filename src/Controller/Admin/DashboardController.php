@@ -21,6 +21,7 @@ use App\Entity\SubCategory;
 class DashboardController extends AbstractDashboardController
 {
     #[Route('/admin', name: 'admin')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
     #[IsGranted('ROLE_ADMIN')]
     public function index(): Response
     {
@@ -46,17 +47,29 @@ class DashboardController extends AbstractDashboardController
     {
         return Dashboard::new()
             ->setTitle('Administration')
+            // ->setTitle('<img src=""> ACME <span class="text-small">Corp.</span>')
+
+            ->renderSidebarMinimized()
+
+            ->setLocales(['fr'])
+            ->setLocales([
+                'en' => '🇬🇧 English',
+                'fr' => '🇫🇷 Français'
+            ])
+
+
             ->renderContentMaximized();
     }
 
     public function configureMenuItems(): iterable
     {
         // yield MenuItem::section('Blog');
-        yield MenuItem::linkToRoute( 'Retour au Site', 'fa fa-undo', 'home');
+        yield MenuItem::linkToRoute('Retour au Site', 'fa fa-undo', 'home');
+        // yield MenuItem::linkToLogout('Logout', 'fa fa-exit');
 
-        yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::subMenu( 'Utilisateurs', icon: 'fas fa-users',)->setSubItems([
+        yield MenuItem::subMenu('Utilisateurs', icon: 'fas fa-users',)->setSubItems([
             MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),
             MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class),
 
@@ -73,5 +86,6 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Genre', 'fas fa-venus-mars', Gender::class),
 
         ]);
+        
     }
 }

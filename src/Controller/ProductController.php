@@ -6,17 +6,16 @@ use App\Repository\ProductRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Twig\Environment;
 
 class ProductController extends AbstractController
 {
-    #[Route('/product', name: 'product')]
-    public function index(): Response
-    {
-        return $this->render('product/index.html.twig', []);
-    }
+    // #[Route('/product', name: 'product')]
+    // public function index(): Response
+    // {
+    //     return $this->render('product/index.html.twig', []);
+    // }
 
-    #[Route('/{gender}/{category}', name: 'product_category')]
+    #[Route('/fr/{gender}/{category}', name: 'product_category')]
     public function Category(
         $category,
         $gender,
@@ -40,7 +39,7 @@ class ProductController extends AbstractController
         ]);
     }
 
-    #[Route('/{gender}/{category}/{productName}/{id}', name: 'product_show')]
+    #[Route('/fr/{gender}/{category}/{productName}/{id}', name: 'product_show')]
     public function ProductShow(
         int $id,
         $productName,
@@ -71,7 +70,7 @@ class ProductController extends AbstractController
     }
 
 
-    #[Route('/{gender}/{category}/{subCategory}', name: 'category_subCategory')]
+    #[Route('/fr/{gender}/{category}/{subCategory}', name: 'category_subCategory')]
     public function subCategory(
         $category,
         $subCategory,
@@ -99,7 +98,7 @@ class ProductController extends AbstractController
 
 
 
-    #[Route('/{gender}/{category}/{subCategory}/{productName}/{id}', name: 'product_show_category')]
+    #[Route('/fr/{gender}/{category}/{subCategory}/{productName}/{id}', name: 'product_show_category')]
     public function ProductShowCategory(
         int $id,
         $productName,
