@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}Hello UserController!{% endblock%}
+{% block body %}
+
+<div class="user-body">
+    {% include "includes/userMenu.html.twig" %}
+
+
+    <div class="user-content">
+        <div class="product-cart">
+            {% for like in likes %}
+            {# Assuming 'like.product' is the associated product #}
+            {% set product = like.product %}
+            <div class="cart">
+                {# <a
+                    href="{{ path('product_show', {id: product.id, 'productName': product.name, 'category': category, 'gender': gender }) }}">
+                    #}
+                    <div class="product-img">
+                        {% for loopIndex, image in product.images %}
+                        <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex> 0 %}style="display:
+                        none;"{% endif %} />
+                        {% endfor %}
+                    </div>
+                    <div class="product-description">
+                        <ul>
+                            <li>{{ product.name }}</li>
+                            <li>{{ (product.price / 100) | number_format(2, ', ' ) }} € </li>
+                        </ul>
+                    </div>
+                    {#
+                </a> #}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+{% endblock %}

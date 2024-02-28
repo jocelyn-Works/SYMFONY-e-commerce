@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use App\Entity\AdressUser;
 use App\Form\AdressUserType;
 use App\Repository\AdressUserRepository;
+use App\Repository\LikeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,7 +25,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 class UserController extends AbstractController
 {
 
-
+// information de l'utilisateur 
     #[Route('/user', name: 'user')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user(
@@ -51,7 +52,7 @@ class UserController extends AbstractController
         ]);
     }
 
-
+// adress de l'utilisateurs
     #[Route('/adress', name: 'user_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_adress(
@@ -168,7 +169,7 @@ class UserController extends AbstractController
     }
 
 
-
+// commande de l'utilisateur
     #[Route('/commande', name: 'user_commande')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_commande(): Response
@@ -176,6 +177,20 @@ class UserController extends AbstractController
 
 
         return $this->render('user/userCommande.html.twig', []);
+    }
+
+    #[Route('/favorite', name: 'user_favorite')]
+    #[IsGranted('IS_AUTHENTICATED_FULLY')]
+    public function favorite(UserInterface $currentUser,
+    LikeRepository $likeRepository): Response
+    {
+
+        $likes = $likeRepository->findUserLikes($currentUser);
+
+
+        return $this->render('user/userLikes.html.twig', [
+            'likes' => $likes
+        ]);
     }
 
 

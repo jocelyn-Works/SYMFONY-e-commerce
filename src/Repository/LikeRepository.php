@@ -21,6 +21,19 @@ class LikeRepository extends ServiceEntityRepository
         parent::__construct($registry, Like::class);
     }
 
+    public function findUserLikes($userId): array
+{
+    return $this->createQueryBuilder('l')
+        ->addSelect('p')  // Sélectionnez l'entité Product
+        ->leftJoin('l.user', 'u')
+        ->leftJoin('l.product', 'p')  // Ajoutez la jointure avec l'entité Product
+        ->andWhere('u.id = :userId')
+        ->setParameter('userId', $userId)
+        ->getQuery()
+        ->getResult()
+    ;
+}
+
 //    /**
 //     * @return Like[] Returns an array of Like objects
 //     */
