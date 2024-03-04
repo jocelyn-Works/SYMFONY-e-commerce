@@ -22,7 +22,7 @@ class ImageProduct
 
     #[ORM\ManyToOne(inversedBy: 'images',targetEntity: Product::class)]
     #[ORM\JoinColumn(nullable: false)]
-    private ?product $product = null;
+    private ?Product $product = null;
 
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -47,7 +47,7 @@ class ImageProduct
 
     public function __toString()
     {
-        return $this->name . ' - ' . ($this->product ? $this->product->getName() : 'N/A'); // ou tout autre champ que vous souhaitez afficher
+        return $this->name . ' - ' . ($this->product ? $this->product->getName() : 'N/A'); 
     }
 
     public function getId(): ?int
@@ -72,12 +72,12 @@ class ImageProduct
         return $this->file;
     }
 
-    public function getProduct(): ?product
+    public function getProduct(): ?Product
     {
         return $this->product;
     }
 
-    public function setProduct(?product $product): static
+    public function setProduct(?Product $product): static
     {
         $this->product = $product;
 

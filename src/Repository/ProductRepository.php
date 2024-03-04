@@ -36,23 +36,19 @@ class ProductRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    // produit ->  images -> category -> sous category //
-    public function findProductCategory_subCategory($category, $subCategory)
+    // produit ->  stock  -> genre -> taille
+    public function findProductStock($gender)
     {
         return $this->createQueryBuilder('p')
-            ->leftJoin('p.images', 'i')
-            ->addSelect('i')
-            ->leftJoin('p.categories', 'c') 
-            ->leftJoin('c.kindCategory', 'k')
-            ->andWhere('k.name = :category') 
-            ->setParameter('category', $category)
-            ->leftJoin('c.subCategory', 's')
-            ->andWhere('s.name = :subCategory')
-            ->setParameter('subCategory', $subCategory)
+            ->select(['p', 's', 'g', 'size'])
+            ->leftJoin('p.stocks', 's')
+            ->leftJoin('s.gender', 'g')
+            ->andWhere('g.name = :gender')
+            ->setParameter('gender', $gender)
+            ->leftJoin('s.size', 'size')
             ->getQuery()
-            ->getResult();
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
     }
-
 
     // produit  ->  images -> category -> produit id  //
     public function findProductWithId($id, $category)
@@ -71,9 +67,46 @@ class ProductRepository extends ServiceEntityRepository
 
             
     }
+
+
+    // produit  ->  stock -> genre -> taille -> pour un produit ( $id )  //
+    public function findProductStockId($gender, $id)
+    {
+        return $this->createQueryBuilder('p')
+            ->select(['p', 's', 'g', 'size'])
+            ->leftJoin('p.stocks', 's')
+            ->leftJoin('s.gender', 'g')
+            ->andWhere('g.name = :gender')
+            ->setParameter('gender', $gender)
+            ->leftJoin('s.size', 'size')
+            ->andWhere('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
+    }
+
+    // produit ->  images -> category -> sous category //
+    public function findProductCategory_subCategory($category, $subCategory)
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.images', 'i')
+            ->addSelect('i')
+            ->leftJoin('p.categories', 'c') 
+            ->leftJoin('c.kindCategory', 'k')
+            ->andWhere('k.name = :category') 
+            ->setParameter('category', $category)
+            ->leftJoin('c.subCategory', 's')
+            ->andWhere('s.name = :subCategory')
+            ->setParameter('subCategory', $subCategory)
+            ->getQuery()
+            ->getResult();
+    }
+
+
+    
   
 
-    // produit ->  images -> category -> sous category -> produit id //
+    // produit ->  images -> category -> sous category -> pour un produit ( $id )//
     public function findProductWithIdCategory($id, $category, $subCategory)
     {
         return $this->createQueryBuilder('p')
@@ -94,49 +127,11 @@ class ProductRepository extends ServiceEntityRepository
             
     }
 
-//     public function findProductStock($id)
-// {
-//     return $this->createQueryBuilder('p')
-//         ->leftJoin('p.stocks', 's')
-//         ->addSelect('s')
-//         ->addSelect('s.quantity') 
-//         ->leftJoin('s.gender', 'g')
-//         ->addSelect('g.name')
-//         ->leftJoin('s.size', 'size')
-//         ->addSelect('size.name')
-//         ->andWhere('p.id = :id')
-//         ->setParameter('id', $id)
-//         ->getQuery()
-//         ->getResult();  
-// }
 
-public function findProductStock($gender)
-{
-    return $this->createQueryBuilder('p')
-        ->select(['p', 's', 'g', 'size'])
-        ->leftJoin('p.stocks', 's')
-        ->leftJoin('s.gender', 'g')
-        ->andWhere('g.name = :gender')
-        ->setParameter('gender', $gender)
-        ->leftJoin('s.size', 'size')
-        ->getQuery()
-        ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-}
 
-public function findProductStockId($gender, $id)
-{
-    return $this->createQueryBuilder('p')
-        ->select(['p', 's', 'g', 'size'])
-        ->leftJoin('p.stocks', 's')
-        ->leftJoin('s.gender', 'g')
-        ->andWhere('g.name = :gender')
-        ->setParameter('gender', $gender)
-        ->leftJoin('s.size', 'size')
-        ->andWhere('p.id = :id')
-        ->setParameter('id', $id)
-        ->getQuery()
-        ->getResult(\Doctrine\ORM\Query::HYDRATE_ARRAY);
-}
+
+
+
 
     
 

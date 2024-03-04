@@ -15,6 +15,7 @@
                 {# <a
                     href="{{ path('product_show', {id: product.id, 'productName': product.name, 'category': category, 'gender': gender }) }}">
                     #}
+
                     <div class="product-img">
                         {% for loopIndex, image in product.images %}
                         <img src="{{ asset('uploads/products/' ~ image.name) }}" {% if loopIndex> 0 %}style="display:

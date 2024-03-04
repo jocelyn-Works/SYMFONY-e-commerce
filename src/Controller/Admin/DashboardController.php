@@ -8,6 +8,7 @@ use App\Entity\AdressUser;
 use App\Entity\Gender;
 use App\Entity\ImageProduct;
 use App\Entity\KindCategory;
+use App\Entity\Like;
 use App\Entity\Size;
 use App\Entity\Stock;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,7 +73,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::subMenu('Utilisateurs', icon: 'fas fa-users',)->setSubItems([
             MenuItem::linkToCrud('Utilisateurs', 'fas fa-user', User::class),
             MenuItem::linkToCrud('Adress-Utilisateurs', 'fas fa-address-book', AdressUser::class),
-
+            MenuItem::linkToCrud('Favoris-Utilisateurs', 'fa-solid fa-thumbs-up', Like::class),
         ]);
 
 
@@ -86,6 +87,5 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Genre', 'fas fa-venus-mars', Gender::class),
 
         ]);
-        
     }
 }

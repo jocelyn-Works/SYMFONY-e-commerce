@@ -48,15 +48,10 @@ class Product
      orphanRemoval: true,  cascade:['persist', 'remove'])]
     private Collection $stocks;
 
+    #[ORM\OneToMany(mappedBy: 'product', targetEntity: Like::class,
+     orphanRemoval: true,  cascade:['persist', 'remove'])]
+        private Collection $likes;
     
-
-    
-
-    
-
-    
-
-
 
     public function __construct()
     {
@@ -222,6 +217,36 @@ class Product
             // set the owning side to null (unless already changed)
             if ($stock->getProduct() === $this) {
                 $stock->setProduct(null);
+            }
+        }
+
+        return $this;
+    }
+
+     /**
+     * @return Collection<int, Stock>
+     */
+    public function getlikes(): Collection
+    {
+        return $this->likes;
+    }
+
+    public function addlike(Stock $like): static
+    {
+        if (!$this->likes->contains($like)) {
+            $this->likes->add($like);
+            $like->setProduct($this);
+        }
+
+        return $this;
+    }
+
+    public function removelike(Like $like): static
+    {
+        if ($this->likes->removeElement($like)) {
+            // set the owning side to null (unless already changed)
+            if ($like->getProduct() === $this) {
+                $like->setProduct(null);
             }
         }
 

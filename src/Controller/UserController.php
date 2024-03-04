@@ -179,6 +179,7 @@ class UserController extends AbstractController
         return $this->render('user/userCommande.html.twig', []);
     }
 
+ // favoris utilisateurs
     #[Route('/favorite', name: 'user_favorite')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function favorite(UserInterface $currentUser,
