@@ -53,7 +53,7 @@ class UserController extends AbstractController
     }
 
 // adress de l'utilisateurs
-    #[Route('/adress', name: 'user_adress')]
+    #[Route('/user/adress', name: 'user_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_adress(
         AdressUserRepository $AdressUserRepository,
@@ -68,7 +68,7 @@ class UserController extends AbstractController
     }
 
     // ajouter une adress
-    #[Route('/add_adress', name: 'user_add_adress')]
+    #[Route('/user/add_adress', name: 'user_add_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function add_user_adress(
         Request $request,
@@ -105,7 +105,7 @@ class UserController extends AbstractController
     }
 
     // suprimer une adress
-    #[Route('/remove_adress/{id}', name: 'remove_adress')]
+    #[Route('/user/remove_adress/{id}', name: 'remove_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function removeFriend(
         int $id,
@@ -130,7 +130,7 @@ class UserController extends AbstractController
     }
 
     // modifier une adress
-    #[Route('/edit_adress/{id}', name: 'edit_adress')]
+    #[Route('/user/edit_adress/{id}', name: 'edit_adress')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function editDescription(
         int $id,
@@ -170,7 +170,7 @@ class UserController extends AbstractController
 
 
 // commande de l'utilisateur
-    #[Route('/commande', name: 'user_commande')]
+    #[Route('/user/commande', name: 'user_commande')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function user_commande(): Response
     {
@@ -180,7 +180,7 @@ class UserController extends AbstractController
     }
 
  // favoris utilisateurs
-    #[Route('/favorite', name: 'user_favorite')]
+    #[Route('/user/like', name: 'user_favorite')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function favorite(UserInterface $currentUser,
     LikeRepository $likeRepository): Response
@@ -198,7 +198,7 @@ class UserController extends AbstractController
 
 
     // changer le mot de passe
-    #[Route('/change_password', name: 'changePassword')]
+    #[Route('/user/change_password', name: 'changePassword')]
     #[IsGranted('IS_AUTHENTICATED_FULLY')]
     public function changePassword(
         Request $request,
