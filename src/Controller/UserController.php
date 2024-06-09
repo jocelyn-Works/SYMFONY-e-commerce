@@ -187,7 +187,7 @@ class UserController extends AbstractController
     {
 
         $likes = $likeRepository->findUserLikes($currentUser);
-
+        // dd($likes);
 
         return $this->render('user/userLikes.html.twig', [
             'likes' => $likes

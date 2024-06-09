@@ -80,7 +80,7 @@
           font-size: large;
           text-align: center;
           margin-bottom: 10px;
-          img{
+          img {
             width: 20px;
             height: 20px;
             align-items: center;
@@ -92,6 +92,25 @@
         padding: 10px 25px;
         font-size: large;
         line-height: 1.5;
+      }
+      .summary {
+        width: 100%;
+
+        @extend.flex-column;
+        padding: 2vh 0 2vh 3rem;
+        // border-bottom: 1px solid gray;
+
+        details {
+          width: 80%;
+          @extend.flex-row;
+          border-top: 1px solid gray;
+          padding: 2vh 0;
+
+          & summary::marker {
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
       }
     }
   }

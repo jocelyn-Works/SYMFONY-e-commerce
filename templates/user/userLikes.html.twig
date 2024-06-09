@@ -12,9 +12,8 @@
             {# Assuming 'like.product' is the associated product #}
             {% set product = like.product %}
             <div class="cart">
-                {# <a
-                    href="{{ path('product_show', {id: product.id, 'productName': product.name, 'category': category, 'gender': gender }) }}">
-                    #}
+                {# <a href="{{ path('product_show', {id: product.id }) }}"> #}
+
 
                     <div class="product-img">
                         {% for loopIndex, image in product.images %}
@@ -28,8 +27,8 @@
                             <li>{{ (product.price / 100) | number_format(2, ', ' ) }} € </li>
                         </ul>
                     </div>
-                    {#
-                </a> #}
+
+                {# </a> #}
             </div>
             {% endfor %}
         </div>

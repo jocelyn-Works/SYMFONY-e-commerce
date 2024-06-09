@@ -16,18 +16,17 @@ class CategoryType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-        ->add('subCategory', EntityType::class, [
-            'class' => SubCategory::class,
-            'choice_label' => 'name',
-            'label' => 'Sous-catégorie',
-        ])
-
         ->add('kindCategory', EntityType::class, [
             'class' => KindCategory::class,
             'choice_label' => 'name',
             'label' => 'Catégorie Kind',
+        ])
+        ->add('subCategory', EntityType::class, [
+            'class' => SubCategory::class,
+            'choice_label' => 'name',
+            'label' => 'Sous-catégorie',
         ]);
-        ;
+
     }
 
     public function configureOptions(OptionsResolver $resolver): void

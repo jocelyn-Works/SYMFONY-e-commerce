@@ -117,7 +117,7 @@ class ProductController extends AbstractController
         $gender,
         ProductRepository $productRepository,
         LikeRepository $likeRepository,
-        Product $productLike
+        Product $productLiked
     ): Response {
 
         $product = $productRepository->findProductWithIdCategory($id, $category, $subCategory);
@@ -129,7 +129,7 @@ class ProductController extends AbstractController
         $stock = $productRepository->findProductStockId($productName, $gender);
         
         $isProductLiked = $likeRepository->findOneBy([
-            'product' => $productLike,
+            'product' => $productLiked,
             'user' => $this->getUser()
         ]) !== null;
 

@@ -51,14 +51,14 @@ endblock %}
           {% endfor %}
         </div>
       </div>
-      
+
       <div class="product-button">
         <a href="" class="btnP btn-shop">Ajouter au panier</a>
         <a href="{{path('app_like', {id: product.id})}}" class="btnP btn-like">
           {% if isProductLiked %}
-            Retirer des favoris <img src="{{ asset('build/images/icons/heart-solid.svg') }}" alt="">
+          Retirer des favoris <img src="{{ asset('build/images/icons/heart-solid.svg') }}" alt="coeur remplie">
           {% else %}
-            Ajouter aux favoris <img src="{{ asset('build/images/icons/heart-regular.svg') }}" alt="">
+          Ajouter aux favoris <img src="{{ asset('build/images/icons/heart-regular.svg') }}" alt="coeur non remplie ">
           {% endif %}
         </a>
       </div>
@@ -68,6 +68,36 @@ endblock %}
           <p>{{ product.description }}</p>
         </li>
       </div>
+      <div class="summary">
+        <details>
+          <summary>
+            <h3 class="">Livraison et retours gratuits</h3>
+          </summary>
+          <div>
+            <div class="">
+              <p>Livraison standard gratuite avec l'Accès Membre.</p>
+              <ul class="">
+                <li class="">Tu peux retourner ta commande gratuitement, dans un délai de 30&nbsp;jours. <u><a
+                      href="">Certaines exclusions s'appliquent.</a></u></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+        <details>
+          <summary>
+            <h3 class="">Avis</h3>
+          </summary>
+          <div>
+            <div class="">
+              <ul class="">
+                <li class=""><a href="">Certaines exclusions s'appliquent.</a></li>
+              </ul>
+            </div>
+          </div>
+        </details>
+
+      </div>
+
     </ul>
   </div>
 </div>
